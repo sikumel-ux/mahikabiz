@@ -16,41 +16,24 @@
                 <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Trans</span></h1>
                 <p class="tagline-yellow">Official Reservation Partner</p>
             </div>
-            
             <div class="info-bar-center">
                 <span id="header-date">--</span>
                 <span class="dot">•</span>
                 <span id="header-time">00:00</span>
-                <span class="dot">•</span>
-                <span id="header-weather"><i class="fas fa-sun"></i> --°C</span>
+                <span id="header-weather" style="margin-left:10px;"></span>
             </div>
         </div>
-
-        <div class="curve-container">
-            <svg class="curve" viewBox="0 0 1440 320"><path fill="#003B73" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160V0H1360C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0H0Z"></path></svg>
-        </div>
-
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" id="search-input" placeholder="Cari rute atau berita...">
+            <input type="text" id="search-input" placeholder="Cari rute, PO, atau berita...">
         </div>
     </header>
 
     <main class="app-body">
-        
         <div id="home-view">
-            <section class="scroll-container">
-                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400');">
-                    <span class="tag">PROMO</span>
-                    <h4>Diskon Mudik</h4>
-                    <p>Booking sekarang lebih hemat.</p>
-                </div>
-                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=400');">
-                    <span class="tag">INFO</span>
-                    <h4>Rute Sumatera</h4>
-                    <p>Pelayanan prima setiap hari.</p>
-                </div>
-            </section>
+            <div class="section-label">Promo & Info Terbaru</div>
+            <section class="scroll-container" id="promo-container">
+                </section>
 
             <section class="services-grid">
                 <div class="svc-item"><div class="svc-icon s1"><i class="fas fa-bus"></i></div><span>Tiket</span></div>
@@ -62,32 +45,30 @@
 
         <section class="catalog-section">
             <h3 id="section-title" class="section-label">Rute Populer</h3>
-            <div id="bus-grid" class="product-grid-3col">
-                </div>
+            <div id="bus-grid" class="product-grid-3col"></div>
         </section>
 
         <section class="news-section">
             <h3 class="section-label">Mahika News</h3>
-            <div id="news-list" class="news-container">
-                </div>
+            <div id="news-list" class="news-container"></div>
         </section>
 
-        <div class="ticker-container">
-            <div class="ticker-wrap"><div class="ticker" id="ticker-content"></div></div>
+        <div class="section-label">Partner Bus Kami</div>
+        <div class="po-ticker-wrapper">
+            <div class="ticker-scroll" id="ticker-content">
+                </div>
         </div>
     </main>
 
     <nav class="bottom-nav">
         <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="#" class="nav-item"><i class="fas fa-newspaper"></i><span>Berita</span></a>
-        <a href="#" class="nav-item"><i class="fas fa-tags"></i><span>Promo</span></a>
-        <a href="#" class="nav-item"><i class="fas fa-user"></i><span>Akun</span></a>
+        <a href="admin.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Admin</span></a>
     </nav>
 
-    <div id="modal-profile" class="modal">
+    <div id="modal-news" class="modal">
         <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <div id="profile-detail"></div>
+            <button class="close-modal" onclick="closeNews()">&times;</button>
+            <div id="news-detail-body"></div>
         </div>
     </div>
 
