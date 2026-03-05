@@ -3,88 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin MAHIKA Trans</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Admin MAHIKA</title>
     <style>
-        :root { --p-dark: #003B73; --accent: #FFC107; --bg: #F5F7FA; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); padding: 20px; }
-        .card { max-width: 450px; margin: 40px auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        h2 { color: var(--p-dark); text-align: center; margin-bottom: 25px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; color: #4A5568; }
-        input { width: 100%; padding: 12px; border: 2px solid #E2E8F0; border-radius: 12px; box-sizing: border-box; outline: none; }
-        input:focus { border-color: var(--p-dark); }
-        .btn { width: 100%; background: var(--p-dark); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px; }
-        #status { text-align: center; margin-top: 15px; font-size: 0.9rem; font-weight: 600; display: none; }
+        body { font-family: 'Inter', sans-serif; background: #F5F7FA; padding: 20px; }
+        .card { max-width: 500px; margin: 20px auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        h2 { color: #003B73; text-align: center; }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #E2E8F0; border-radius: 12px; box-sizing: border-box; }
+        .btn { width: 100%; background: #003B73; color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>Update Jadwal</h2>
-    <form id="adminForm">
-        <div class="form-group">
-            <label>Kota Tujuan</label>
-            <input type="text" id="tujuan" required placeholder="Contoh: Merak">
-        </div>
-        <div class="form-group">
-            <label>Nama PO</label>
-            <input type="text" id="namaPO" required placeholder="Contoh: Murni Jaya">
-        </div>
-        <div class="form-group">
-            <label>Jam Keberangkatan</label>
-            <input type="text" id="jam" required placeholder="Contoh: 12:30">
-        </div>
-        <div class="form-group">
-            <label>Harga Tiket</label>
-            <input type="number" id="harga" required placeholder="Contoh: 200000">
-        </div>
-        <button type="submit" class="btn" id="submitBtn">Kirim ke Sheets</button>
+    <h2>Input Jadwal Bus</h2>
+    <form id="formJadwal">
+        <input type="text" id="tujuan" placeholder="Kota Tujuan" required>
+        <input type="text" id="namaPO" placeholder="Nama PO" required>
+        <input type="text" id="jam" placeholder="Jam (Contoh: 12:00)" required>
+        <input type="number" id="harga" placeholder="Harga (Angka saja)" required>
+        <input type="text" id="fotoBus" placeholder="Link Foto Bus">
+        <button type="submit" class="btn">Simpan Jadwal</button>
     </form>
-    <div id="status"></div>
+</div>
+
+<div class="card">
+    <h2>Input Mahika News</h2>
+    <form id="formNews">
+        <input type="text" id="judul" placeholder="Judul Berita" required>
+        <textarea id="isi" placeholder="Ringkasan Berita" rows="3" required></textarea>
+        <input type="text" id="fotoNews" placeholder="Link Foto Berita">
+        <button type="submit" class="btn" style="background: #FFC107; color: #000;">Posting Berita</button>
+    </form>
 </div>
 
 <script>
-   const API_URL = "https://script.google.com/macros/s/AKfycbxb86eZnUZvSYWRkX2uSxohRzien9x1zHyu1XZGkKCV8tekejSG8DygZTdI3bEkDThF0Q/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbxb86eZnUZvSYWRkX2uSxohRzien9x1zHyu1XZGkKCV8tekejSG8DygZTdI3bEkDThF0Q/exec";
 
-    document.getElementById('adminForm').addEventListener('submit', async (e) => {
+    async function kirim(payload) {
+        alert("Sedang mengirim...");
+        await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+        alert("Berhasil!");
+        location.reload();
+    }
+
+    document.getElementById('formJadwal').onsubmit = (e) => {
         e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        const status = document.getElementById('status');
-        
-        const payload = {
+        kirim({
+            type: "jadwal",
             tujuan: document.getElementById('tujuan').value,
             namaPO: document.getElementById('namaPO').value,
             jam: document.getElementById('jam').value,
-            harga: document.getElementById('harga').value
-        };
+            harga: document.getElementById('harga').value,
+            foto: document.getElementById('fotoBus').value
+        });
+    };
 
-        btn.disabled = true;
-        btn.innerText = "Mengirim...";
-        status.style.display = "block";
-        status.innerText = "Sedang diproses...";
-        status.style.color = "#666";
-
-        try {
-            await fetch(API_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-
-            status.innerText = "✅ Berhasil Masuk ke Google Sheets!";
-            status.style.color = "green";
-            document.getElementById('adminForm').reset();
-        } catch (err) {
-            status.innerText = "❌ Error: " + err.message;
-            status.style.color = "red";
-        } finally {
-            btn.disabled = false;
-            btn.innerText = "Kirim ke Sheets";
-        }
-    });
+    document.getElementById('formNews').onsubmit = (e) => {
+        e.preventDefault();
+        kirim({
+            type: "news",
+            judul: document.getElementById('judul').value,
+            isi: document.getElementById('isi').value,
+            foto: document.getElementById('fotoNews').value
+        });
+    };
 </script>
-
 </body>
 </html>
