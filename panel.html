@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin MAHIKA</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #F5F7FA; padding: 20px; }
+        .card { max-width: 500px; margin: 20px auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #E2E8F0; border-radius: 12px; box-sizing: border-box; }
+        .btn { width: 100%; background: #003B73; color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Update Promo Card (Slot 1-5)</h2>
+    <form id="formPromo">
+        <select id="slot" required>
+            <option value="1">Card 1 (Paling Kiri)</option>
+            <option value="2">Card 2</option>
+            <option value="3">Card 3</option>
+            <option value="4">Card 4</option>
+            <option value="5">Card 5</option>
+        </select>
+        <input type="text" id="pJudul" placeholder="Judul Promo (Sesuai Judul News)" required>
+        <textarea id="pDesk" placeholder="Deskripsi Singkat Promo (Justify)" required></textarea>
+        <input type="file" id="pFoto" accept="image/*">
+        <button type="submit" class="btn">Update Promo</button>
+    </form>
+</div>
+
+<script>
+    const API_URL = "GANTI_DENGAN_URL_GAS_ANDA";
+
+    document.getElementById('formPromo').onsubmit = async (e) => {
+        e.preventDefault();
+        const file = document.getElementById('pFoto').files[0];
+        let fileData = null;
+        if(file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = async () => {
+                send({
+                    type: "promo",
+                    slot: document.getElementById('slot').value,
+                    judul: document.getElementById('pJudul').value,
+                    desk: document.getElementById('pDesk').value,
+                    fileData: reader.result,
+                    fileName: file.name
+                });
+            };
+        }
+    };
+
+    async function send(payload) {
+        alert("Sedang memproses...");
+        await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+        alert("Berhasil!");
+        location.reload();
+    }
+</script>
+</body>
+</html>
