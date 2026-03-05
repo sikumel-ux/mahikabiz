@@ -1,0 +1,197 @@
+/* Palet Warna Biru dari Pinterest:
+   Lightest: #BFD7ED
+   Medium: #60A3D9
+   Deep: #0074B7
+   Darkest: #003B73 (Warna Utama/Header)
+   Aksen Kuning: #FFC107
+*/
+
+:root {
+    --p-darkest: #003B73; /* Warna Header */
+    --p-deep: #0074B7;
+    --p-medium: #60A3D9;
+    --p-lightest: #BFD7ED;
+    --accent-yellow: #FFC107;
+    --accent-yellow-hover: #FFB300;
+    
+    --bg: #F5F8FC;
+    --card: #FFFFFF;
+    --text-main: #1C2B3A;
+    --text-muted: #6C7D8E;
+    --shadow: 0 10px 30px rgba(12, 57, 107, 0.08);
+    
+    --transition: all 0.3s ease;
+}
+
+.dark-mode {
+    --bg: #0C1A2B;
+    --card: #18283C;
+    --text-main: #E2E8F0;
+    --text-muted: #A0AEC0;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    transition: background-color 0.3s;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 30px; /* Space for FAB */
+}
+
+/* --- HEADER & CURVE --- */
+.main-header {
+    background-color: var(--p-darkest);
+    position: relative;
+    padding: 30px 20px 80px 20px;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.logo-text { font-size: 1.4rem; font-weight: 700; }
+.logo-text .accent-text { color: var(--accent-yellow); }
+
+.header-actions { display: flex; gap: 10px; }
+
+.header-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none; color: white;
+    width: 40px; height: 40px; border-radius: 12px;
+    cursor: pointer; transition: 0.2s;
+    font-size: 1.1rem;
+}
+
+.header-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+.curve-container {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    transform: translateY(1px); /* Hide potential gap */
+}
+.curve { width: 100%; height: auto; }
+
+/* --- FLOATING SEARCH BOX --- */
+.search-box {
+    position: absolute; bottom: -28px; left: 20px; right: 20px;
+    background: var(--card);
+    height: 56px; border-radius: 16px;
+    display: flex; align-items: center; padding: 0 20px;
+    box-shadow: 0 8px 25px rgba(0, 59, 115, 0.15);
+}
+
+.search-icon { color: var(--text-muted); margin-right: 14px; }
+.search-box input {
+    border: none; width: 100%; outline: none; background: transparent;
+    color: var(--text-main); font-size: 1rem;
+}
+
+/* --- MAIN APP BODY --- */
+.app-body { padding-top: 50px; }
+
+.section-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 20px; margin-bottom: 12px;
+}
+.section-header h3 { font-size: 1.1rem; font-weight: 600; }
+.see-all { font-size: 0.8rem; text-decoration: none; color: var(--p-deep); font-weight: 500; }
+
+/* Promo Image Scroll */
+.scroll-container {
+    display: flex; overflow-x: auto; gap: 16px;
+    padding: 10px 20px; scrollbar-width: none;
+}
+.scroll-container::-webkit-scrollbar { display: none; }
+
+.promo-card {
+    min-width: 280px; height: 160px; border-radius: 20px;
+    background-size: cover; background-position: center;
+    padding: 20px; color: white;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    box-shadow: var(--shadow);
+}
+.promo-card h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+.promo-card p { font-size: 0.8rem; opacity: 0.9; }
+.promo-card .tag {
+    position: absolute; top: 15px; left: 15px;
+    font-size: 0.6rem; padding: 4px 10px; border-radius: 20px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tag { background: rgba(0,0,0,0.5); }
+.tag-new { background: #22C55E; }
+.tag-limited { background: #EF4444; }
+
+/* Services Grid */
+.services-section { padding: 25px 20px; }
+.services-grid {
+    display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;
+}
+.service-item { text-align: center; width: 68px; }
+
+.icon-circle {
+    width: 60px; height: 60px; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 8px; font-size: 1.4rem; color: white;
+    box-shadow: var(--shadow); transition: 0.2s;
+}
+.service-item:hover .icon-circle { transform: translateY(-4px); }
+
+/* Service Icon Colors from Palet */
+.svc-1 { background-color: var(--p-deep); }
+.svc-2 { background-color: var(--p-medium); }
+.svc-3 { background-color: #2D96CC; /* Variant */ }
+.svc-4 { background-color: #4A89BF; /* Variant */ }
+.svc-5 { background-color: var(--p-lightest); color: var(--p-darkest); }
+
+.service-item span { font-size: 0.75rem; font-weight: 500; display: block; line-height: 1.2; }
+
+/* Product Catalog Grid */
+.product-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px;
+}
+
+.product-card {
+    background: var(--card); border-radius: 20px; padding: 10px;
+    box-shadow: var(--shadow); transition: 0.3s;
+}
+.product-card:hover { transform: scale(1.02); }
+
+.product-card img { width: 100%; aspect-ratio: 16/10; border-radius: 15px; margin-bottom: 10px; object-fit: cover; }
+.product-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
+.product-card .price { color: var(--p-darkest); font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; display: block; }
+.product-card .price span { font-size: 0.7rem; font-weight: 400; }
+
+.buy-btn {
+    width: 100%; background: var(--accent-yellow); border: none; padding: 10px;
+    border-radius: 12px; font-weight: 600; cursor: pointer; color: #333;
+    transition: 0.2s; font-size: 0.85rem;
+}
+.buy-btn:hover { background-color: var(--accent-yellow-hover); }
+
+/* --- FAB WhatsApp --- */
+.fab-wa {
+    position: fixed; bottom: 20px; right: 20px;
+    width: 58px; height: 58px; background: #25D366; color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    text-decoration: none; z-index: 999; transition: 0.3s;
+}
+.fab-wa:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7); }
+
+/* --- Tablet/Desktop View --- */
+@media (min-width: 768px) {
+    .promo-card { min-width: 320px; }
+    .product-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+@media (min-width: 1024px) {
+    .app-body, .section-header, .scroll-container, .product-grid { max-width: 1000px; margin-left: auto; margin-right: auto; }
+  }
+      
