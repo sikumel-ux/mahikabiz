@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAHIKA Trans - Jadwal Bus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+
+    <header class="main-header">
+        <div class="header-content">
+            <h1 class="logo-text">MAHIKA <span class="accent-text">Trans</span></h1>
+            <button id="theme-toggle" class="header-btn"><i class="fas fa-moon"></i></button>
+        </div>
+        <div class="curve-container">
+            <svg class="curve" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#003B73" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160V0H1360C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0H0Z"></path>
+            </svg>
+        </div>
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="search-input" placeholder="Cari Kota Tujuan atau Nama PO...">
+        </div>
+    </header>
+
+    <main class="app-body">
+        <section class="catalog-section">
+            <div class="section-header">
+                <h3>Jadwal Keberangkatan</h3>
+            </div>
+            <div id="bus-grid" class="product-grid">
+                <p style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--muted);">Memuat jadwal...</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-profile" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div id="profile-detail"></div>
+        </div>
+    </div>
+
+    <div class="sticky-action">
+        <a href="https://wa.me/6281234567890" class="btn-wa-full">
+            <i class="fab fa-whatsapp"></i>
+            <span>Tanya Jadwal Lain via WhatsApp</span>
+        </a>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active"><i class="fas fa-bus"></i><span>Jadwal</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-map-marked-alt"></i><span>Rute</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-ticket-alt"></i><span>Tiket</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-info-circle"></i><span>Info</span></a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
