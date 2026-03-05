@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHIKA Trans - Premium Travel</title>
+    <title>MAHIKA Trans - Official Reservation Partner</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -12,10 +12,21 @@
 
     <header class="main-header">
         <div class="header-content">
-            <h1 class="logo-text">MAHIKA <span class="accent-text">Trans</span></h1>
-            <button id="theme-toggle" class="header-btn">
-                <i class="fas fa-moon"></i>
-            </button>
+            <div class="header-info">
+                <div class="branding">
+                    <h1 class="logo-text">MAHIKA <span class="accent-text">Trans</span></h1>
+                    <p class="tagline">Official Reservation Partner</p>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-group">
+                        <span id="header-date" class="info-text">Memuat...</span>
+                        <span id="header-time" class="info-time">00:00:00</span>
+                    </div>
+                    <span id="header-weather" class="info-weather"><i class="fas fa-cloud-sun"></i> --°C</span>
+                </div>
+            </div>
+            <button id="theme-toggle" class="header-btn"><i class="fas fa-moon"></i></button>
         </div>
         
         <div class="curve-container">
@@ -26,77 +37,36 @@
 
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" id="search-input" placeholder="Cari armada atau tujuan...">
+            <input type="text" id="search-input" placeholder="Mau pergi ke mana? (Cari tujuan...)">
         </div>
     </header>
 
     <main class="app-body">
-        <section class="scroll-container">
-            <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://picsum.photos/400/200?random=10');">
-                <span class="tag tag-new">Promo</span>
-                <h4>Sewa Lepas Kunci</h4>
-                <p>Mulai dari Rp 300rb/hari</p>
+        <div id="welcome-msg" class="welcome-section">
+            <div class="welcome-icon">
+                <i class="fas fa-bus-alt"></i>
             </div>
-            <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://picsum.photos/400/200?random=11');">
-                <span class="tag">Update</span>
-                <h4>All-in Driver</h4>
-                <p>Bensin + Driver + Parkir</p>
-            </div>
-        </section>
-
-        <section class="services-grid">
-            <div class="service-item">
-                <div class="icon-circle svc-1"><i class="fas fa-car"></i></div>
-                <span>Sewa Mobil</span>
-            </div>
-            <div class="service-item">
-                <div class="icon-circle svc-2"><i class="fas fa-route"></i></div>
-                <span>Tour Travel</span>
-            </div>
-            <div class="service-item">
-                <div class="icon-circle svc-3"><i class="fas fa-plane-arrival"></i></div>
-                <span>Drop Bandara</span>
-            </div>
-            <div class="service-item">
-                <div class="icon-circle svc-4"><i class="fas fa-briefcase"></i></div>
-                <span>Logistik</span>
-            </div>
-        </section>
+            <h2>Cari Jadwal Bus</h2>
+            <p>Masukkan kota tujuan untuk melihat jadwal keberangkatan bus terbaru.</p>
+        </div>
 
         <section class="catalog-section">
-            <div class="section-header">
-                <h3>Armada Tersedia</h3>
-                <a href="#" class="see-all">Lihat Semua</a>
-            </div>
-            <div id="product-grid" class="product-grid">
-                </div>
+            <div id="bus-grid" class="product-grid"></div>
         </section>
     </main>
 
-    <div class="sticky-action">
-        <a href="https://wa.me/6281234567890" class="btn-wa-full">
-            <i class="fab fa-whatsapp"></i>
-            <span>Hubungi Admin Mahika</span>
-        </a>
+    <div id="modal-profile" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div id="profile-detail"></div>
+        </div>
     </div>
 
     <nav class="bottom-nav">
-        <a href="#" class="nav-item active">
-            <i class="fas fa-th-large"></i>
-            <span>Beranda</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-calendar-check"></i>
-            <span>Pesanan</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-tags"></i>
-            <span>Promo</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-comment-dots"></i>
-            <span>Bantuan</span>
-        </a>
+        <a href="#" class="nav-item active"><i class="fas fa-search"></i><span>Cari</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-ticket-alt"></i><span>Tiket</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-bullhorn"></i><span>Promo</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-user-shield"></i><span>Bantuan</span></a>
     </nav>
 
     <script src="script.js"></script>
