@@ -1,5 +1,5 @@
 // Gantilah API_URL dengan URL Deployment Google Apps Script kamu
-const API_URL = "https://script.google.com/macros/s/AKfycbx9JsUb0saYvFnH8vpCn2JZu_AzdrXXXmQIcGfMW0dsTvPndFQC_CtKyLhMx_6Kjd_IEg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzG_wasu9w6MSGUEJqQd4xFWdLgsaRpPlJ3IiZN99M016HzjhtBKbVYoq-r-yICvDPk8w/exec";
 
 let db = { jadwal: [], profil: [] };
 
