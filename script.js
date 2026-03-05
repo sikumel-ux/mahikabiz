@@ -1,5 +1,5 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbx9JsUb0saYvFnH8vpCn2JZu_AzdrXXXmQIcGfMW0dsTvPndFQC_CtKyLhMx_6Kjd_IEg/exec";
-let db = { jadwal: [] };
+let db = { jadwal: [], profil: [] };
 
 function updateHeader() {
     const now = new Date();
@@ -16,33 +16,63 @@ async function fetchWeather() {
 }
 
 async function loadData() {
-    const res = await fetch(API_URL);
-    db = await res.json();
-    render(db.jadwal); // Load awal tampilkan semua rute populer
+    try {
+        const res = await fetch(API_URL);
+        db = await res.json();
+        render(db.jadwal);
+    } catch (e) { console.log("Gagal muat data"); }
 }
 
 function render(data) {
     const grid = document.getElementById('bus-grid');
-    grid.innerHTML = data.slice(0, 6).map(bus => `
+    if(data.length === 0) {
+        grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:20px;">Rute tidak ditemukan</p>`;
+        return;
+    }
+    grid.innerHTML = data.map(bus => `
         <div class="bus-card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3448/3448339.png" alt="bus">
             <h4>${bus.Tujuan}</h4>
-            <span class="meta">${bus["Nama PO"]} • ${bus.Jam}</span>
+            <span class="info">${bus["Nama PO"]}<br>${bus.Jam}</span>
             <span class="price">Rp ${bus.Harga}</span>
-            <button class="msg-btn" onclick="order('${bus["Nama PO"]}', '${bus.Tujuan}')">PESAN</button>
+            <button class="btn-book" onclick="showProfile('${bus["Nama PO"]}')">PESAN</button>
         </div>
     `).join('');
 }
 
 document.getElementById('search-input').addEventListener('input', (e) => {
     const val = e.target.value.toLowerCase();
-    const filtered = db.jadwal.filter(b => b.Tujuan.toLowerCase().includes(val));
-    render(filtered);
+    const home = document.getElementById('home-view');
+    const title = document.getElementById('section-title');
+    
+    if(val.length > 0) {
+        home.style.display = "none";
+        title.innerText = "Hasil Pencarian";
+        const filtered = db.jadwal.filter(b => b.Tujuan.toLowerCase().includes(val) || b["Nama PO"].toLowerCase().includes(val));
+        render(filtered);
+    } else {
+        home.style.display = "block";
+        title.innerText = "Rute Populer";
+        render(db.jadwal);
+    }
 });
 
-function order(po, tujuan) {
-    window.location.href = `https://wa.me/6281234567890?text=Halo Mahika, pesan tiket ${po} ke ${tujuan}`;
+function showProfile(namaPO) {
+    const po = db.profil.find(p => p["Nama PO"] === namaPO);
+    const content = document.getElementById('profile-detail');
+    if (!po) return;
+    content.innerHTML = `
+        <img src="${po.Foto}" style="width:100%; border-radius:15px; margin-bottom:10px;">
+        <h3 style="color:var(--p-dark)">${po["Nama PO"]}</h3>
+        <p style="font-size:0.8rem; margin:10px 0;">${po.Deskripsi}</p>
+        <a href="https://wa.me/6281234567890?text=Halo Mahika, saya mau tanya tiket ${po["Nama PO"]}" 
+           style="display:block; text-align:center; background:var(--p-dark); color:white; padding:12px; border-radius:12px; text-decoration:none; font-weight:700;">
+           Hubungi via WhatsApp
+        </a>
+    `;
+    document.getElementById('modal-profile').style.display = 'flex';
 }
+
+function closeModal() { document.getElementById('modal-profile').style.display = 'none'; }
 
 setInterval(updateHeader, 1000);
 updateHeader(); fetchWeather(); loadData();
