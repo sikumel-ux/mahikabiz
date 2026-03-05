@@ -1,47 +1,42 @@
-// Dummy Data Mahika Trans
-const products = [
-    { id: 1, name: "Toyota Avanza", price: "450.000", img: "https://images.unsplash.com/photo-1620853755255-b0f3404c0e2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTkyMXwwfDF8c2VhcmNofDN8fGF2YW56YXxlbnwwfHx8fDE2NzI5MjI3ODg&ixlib=rb-4.0.3&q=80&w=400" },
-    { id: 2, name: "Toyota Innova Zenix", price: "750.000", img: "https://images.unsplash.com/photo-1669460594833-8b7c7b897850?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTkyMXwwfDF8c2VhcmNofDJ8fGlubm92YSUyMHplbml4fGVufDB8fHx8MTY3MjkyMjg3Mw&ixlib=rb-4.0.3&q=80&w=400" },
-    { id: 3, name: "Toyota Fortuner", price: "950.000", img: "https://images.unsplash.com/photo-1626084992923-d667c4e51270?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTkyMXwwfDF8c2VhcmNofDF8fGZvcnR1bmVyfGVufDB8fHx8MTY3MjkyMjkxMw&ixlib=rb-4.0.3&q=80&w=400" },
-    { id: 4, name: "Toyota Hiace", price: "1.300.000", img: "https://images.unsplash.com/photo-1663116997034-7833bd442ef5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTkyMXwwfDF8c2VhcmNofDF8fGhpYWNlfGVufDB8fHx8MTY3MjkyMjk0Mg&ixlib=rb-4.0.3&q=80&w=400" },
+const cars = [
+    { name: "Toyota Avanza", price: "450rb", img: "https://picsum.photos/300/200?random=1" },
+    { name: "Innova Zenix", price: "800rb", img: "https://picsum.photos/300/200?random=2" },
+    { name: "Toyota Hiace", price: "1.2jt", img: "https://picsum.photos/300/200?random=3" },
+    { name: "Fortuner VRZ", price: "1.1jt", img: "https://picsum.photos/300/200?random=4" }
 ];
 
-const productGrid = document.getElementById('product-grid');
-const searchInput = document.getElementById('search-input');
-const themeToggle = document.getElementById('theme-toggle');
+const grid = document.getElementById('product-grid');
+const search = document.getElementById('search-input');
+const toggle = document.getElementById('theme-toggle');
 
-// 1. Render Catalog
-function renderCatalog(items) {
-    productGrid.innerHTML = items.map(p => `
+function render(data) {
+    grid.innerHTML = data.map(c => `
         <div class="product-card">
-            <img src="${p.img}" alt="${p.name}">
-            <h4>${p.name}</h4>
-            <div class="price">Rp ${p.price} <span>/hari</span></div>
-            <button class="buy-btn">Pesan Sekarang</button>
+            <img src="${c.img}" alt="${c.name}">
+            <h4>${c.name}</h4>
+            <span class="price">Rp ${c.price} <small>/hari</small></span>
+            <button class="buy-btn">Pesan</button>
         </div>
     `).join('');
 }
 
-// 2. Search Filter Realtime
-searchInput.addEventListener('input', (e) => {
+search.addEventListener('input', (e) => {
     const val = e.target.value.toLowerCase();
-    const filtered = products.filter(p => p.name.toLowerCase().includes(val));
-    renderCatalog(filtered);
+    render(cars.filter(c => c.name.toLowerCase().includes(val)));
 });
 
-// 3. Dark Mode Toggle
-themeToggle.addEventListener('click', () => {
+toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
     const isDark = document.body.classList.contains('dark-mode');
-    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    localStorage.setItem('mode', isDark ? 'dark' : 'light');
+    toggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
 });
 
-// 4. Load Mode Preference
-if (localStorage.getItem('mode') === 'dark') {
-    document.body.classList.add('dark-mode');
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-}
+// Nav Active State
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function() {
+        document.querySelector('.nav-item.active').classList.remove('active');
+        this.classList.add('active');
+    });
+});
 
-// Initial Render
-renderCatalog(products);
+render(cars);
