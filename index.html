@@ -16,6 +16,7 @@
                 <h1 class="logo-text">MAHIKA <span class="accent-text">Trans</span></h1>
                 <p class="tagline">Official Reservation Partner</p>
             </div>
+            
             <div class="info-bar-center">
                 <span id="header-date">--</span>
                 <span class="dot">•</span>
@@ -24,42 +25,49 @@
                 <span id="header-weather"><i class="fas fa-sun"></i> --°C</span>
             </div>
         </div>
+
         <div class="curve-container">
-            <svg class="curve" viewBox="0 0 1440 320"><path fill="#003B73" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160V0H1360C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0H0Z"></path></svg>
+            <svg class="curve" viewBox="0 0 1440 320">
+                <path fill="#003B73" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160V0H1360C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0H0Z"></path>
+            </svg>
         </div>
+
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" id="search-input" placeholder="Cari rute atau PO bus...">
+            <input type="text" id="search-input" placeholder="Mau pergi ke mana hari ini?">
         </div>
     </header>
 
     <main class="app-body">
+        
         <div id="home-view">
             <section class="scroll-container">
-                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://picsum.photos/400/200?bus=1');">
+                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=400&q=80');">
                     <span class="tag">PROMO</span>
-                    <h4>Mudik Lebih Awal</h4>
-                    <p>Cek ketersediaan tiket sekarang!</p>
+                    <h4>Diskon Akhir Tahun</h4>
+                    <p>Cek rute favoritmu sekarang!</p>
                 </div>
-                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://picsum.photos/400/200?bus=2');">
+                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=400&q=80');">
                     <span class="tag">HOT</span>
-                    <h4>Rute Baru</h4>
-                    <p>Kini tersedia trayek Merak - Solo.</p>
+                    <h4>Rute Sumatera</h4>
+                    <p>Kini tersedia via Tol Trans Sumatera.</p>
                 </div>
             </section>
 
             <section class="services-grid">
-                <div class="svc-item"><div class="svc-icon s1"><i class="fas fa-bus"></i></div><span>Tiket</span></div>
+                <div class="svc-item"><div class="svc-icon s1"><i class="fas fa-bus"></i></div><span>Tiket Bus</span></div>
                 <div class="svc-item"><div class="svc-icon s2"><i class="fas fa-shuttle-van"></i></div><span>Travel</span></div>
                 <div class="svc-item"><div class="svc-icon s3"><i class="fas fa-car"></i></div><span>Rental</span></div>
-                <div class="svc-item"><div class="svc-icon s4"><i class="fas fa-box"></i></div><span>Paket</span></div>
+                <div class="svc-item"><div class="svc-icon s4"><i class="fas fa-box"></i></div><span>Kirim Paket</span></div>
             </section>
         </div>
 
         <section class="catalog-section">
-            <h3 id="section-title" style="padding: 10px 20px; font-size: 0.9rem;">Rute Populer</h3>
+            <h3 id="section-title" style="padding: 0 20px 15px; font-size: 1rem; color: #003B73;">Rute Populer</h3>
+            
             <div id="bus-grid" class="product-grid-3col">
-                </div>
+                <p style="grid-column: 1/-1; text-align: center; padding: 20px; color: #718096;">Memuat jadwal...</p>
+            </div>
         </section>
 
         <div class="ticker-container">
@@ -83,10 +91,12 @@
     <div id="modal-profile" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">&times;</button>
-            <div id="profile-detail"></div>
+            <div id="profile-detail">
+                </div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
+    
