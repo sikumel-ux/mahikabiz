@@ -1,8 +1,8 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbx9JsUb0saYvFnH8vpCn2JZu_AzdrXXXmQIcGfMW0dsTvPndFQC_CtKyLhMx_6Kjd_IEg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzG_wasu9w6MSGUEJqQd4xFWdLgsaRpPlJ3IiZN99M016HzjhtBKbVYoq-r-yICvDPk8w/exec";
 
 let db = { jadwal: [], profil: [] };
 
-// 1. Clock & Date
+// 1. Clock & Date Realtime
 function updateClock() {
     const now = new Date();
     const options = { weekday: 'long', day: 'numeric', month: 'long' };
@@ -10,25 +10,25 @@ function updateClock() {
     document.getElementById('header-time').innerText = now.toLocaleTimeString('id-ID', { hour12: false });
 }
 
-// 2. Weather (Free API)
+// 2. Weather Info (Jakarta Area)
 async function fetchWeather() {
     try {
         const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=-6.2088&longitude=106.8456&current_weather=true`);
         const data = await res.json();
         document.getElementById('header-weather').innerHTML = `<i class="fas fa-cloud-sun"></i> ${Math.round(data.current_weather.temperature)}°C`;
-    } catch (e) { document.getElementById('header-weather').style.display = 'none'; }
+    } catch (e) { console.log("Weather offline"); }
 }
 
-// 3. Fetch Data From Sheets
+// 3. Fetch Data from Sheet
 async function fetchData() {
     try {
         const response = await fetch(API_URL);
         db = await response.json();
-        console.log("Data loaded");
-    } catch (err) { console.error("API Error:", err); }
+        console.log("Data Mahika Loaded");
+    } catch (err) { console.error("Database error"); }
 }
 
-// 4. Render Engine
+// 4. Render Logic (Search to Show)
 function render(data, isSearching) {
     const grid = document.getElementById('bus-grid');
     const welcome = document.getElementById('welcome-msg');
@@ -37,9 +37,9 @@ function render(data, isSearching) {
         grid.innerHTML = "";
         welcome.style.display = "block";
         if(isSearching && data.length === 0) {
-            welcome.innerHTML = `<i class="fas fa-search-minus" style="font-size:3rem; opacity:0.2;"></i><h2>Tidak Ditemukan</h2><p>Jadwal untuk rute ini belum tersedia.</p>`;
+            welcome.innerHTML = `<i class="fas fa-search-minus" style="font-size:3rem; opacity:0.1;"></i><h2>Tidak Ditemukan</h2><p>Maaf, jadwal rute tersebut belum tersedia.</p>`;
         } else {
-            welcome.innerHTML = `<div class="welcome-icon"><i class="fas fa-bus-alt"></i></div><h2>Cari Jadwal Bus</h2><p>Masukkan kota tujuan di atas untuk melihat jadwal keberangkatan.</p>`;
+            welcome.innerHTML = `<div class="welcome-icon"><i class="fas fa-bus-alt"></i></div><h2>Cari Jadwal Bus</h2><p>Masukkan kota tujuan untuk melihat jadwal keberangkatan bus terbaru.</p>`;
         }
         return;
     }
@@ -56,7 +56,7 @@ function render(data, isSearching) {
     `).join('');
 }
 
-// 5. Search Trigger
+// 5. Search Interaction
 document.getElementById('search-input').addEventListener('input', (e) => {
     const val = e.target.value.toLowerCase();
     if (val.length > 0) {
@@ -70,7 +70,7 @@ document.getElementById('search-input').addEventListener('input', (e) => {
     }
 });
 
-// 6. Modal Profile
+// 6. Modal Profile Detail
 function showProfile(namaPO) {
     const po = db.profil.find(p => p["Nama PO"] === namaPO);
     const content = document.getElementById('profile-detail');
@@ -83,9 +83,9 @@ function showProfile(namaPO) {
         <div style="background:var(--bg); padding:15px; border-radius:15px; font-size:0.8rem;">
             <strong>Fasilitas:</strong><br>${po.Fasilitas}
         </div>
-        <a href="https://wa.me/6281234567890?text=Halo, info tiket ${po["Nama PO"]} rute ${document.getElementById('search-input').value}" 
+        <a href="https://wa.me/6281234567890?text=Halo, saya ingin pesan tiket ${po["Nama PO"]} tujuan ${document.getElementById('search-input').value}" 
            style="display:block; text-align:center; background:var(--p-dark); color:white; text-decoration:none; padding:15px; border-radius:16px; margin-top:20px; font-weight:700;">
-           Hubungi Agen
+           Pesan Tiket via WA
         </a>
     `;
     document.getElementById('modal-profile').style.display = 'flex';
@@ -93,15 +93,15 @@ function showProfile(namaPO) {
 
 function closeModal() { document.getElementById('modal-profile').style.display = 'none'; }
 
-// 7. Initial Run
+// 7. Initialization
 setInterval(updateClock, 1000);
 updateClock();
 fetchWeather();
 fetchData();
 
-// Theme Toggle
+// Theme Toggle Logic
 document.getElementById('theme-toggle').addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
     document.querySelector('#theme-toggle i').className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
 });
-        
+    
