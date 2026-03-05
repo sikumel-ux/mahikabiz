@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - MAHIKA Trans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --p-dark: #003B73; --accent: #FFC107; --bg: #F5F7FA; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 20px; }
+        .admin-container { max-width: 600px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 30px; }
+        header h1 { color: var(--p-dark); margin: 0; }
+        
+        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card h3 { margin-top: 0; color: var(--p-dark); border-bottom: 2px solid var(--bg); padding-bottom: 10px; }
+        
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; color: #4A5568; }
+        input, textarea, select { width: 100%; padding: 12px; border: 2px solid #E2E8F0; border-radius: 12px; font-size: 0.9rem; outline: none; box-sizing: border-box; }
+        input:focus { border-color: var(--p-dark); }
+        
+        .btn-submit { width: 100%; background: var(--p-dark); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background: #002b55; }
+        .btn-submit:disabled { background: #CBD5E0; cursor: not-allowed; }
+        
+        #status-msg { text-align: center; font-weight: 600; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="admin-container">
+    <header>
+        <h1>Admin <span style="color:var(--accent)">MAHIKA</span></h1>
+        <p>Update Database Google Sheets</p>
+    </header>
+
+    <div class="card">
+        <h3><i class="fas fa-route"></i> Tambah Jadwal Bus</h3>
+        <form id="form-jadwal">
+            <div class="form-group">
+                <label>Kota Tujuan</label>
+                <input type="text" id="tujuan" placeholder="Contoh: Yogyakarta" required>
+            </div>
+            <div class="form-group">
+                <label>Nama PO Bus</label>
+                <input type="text" id="namaPO" placeholder="Contoh: MURNI JAYA" required>
+            </div>
+            <div class="form-group">
+                <label>Jam Keberangkatan</label>
+                <input type="text" id="jam" placeholder="Contoh: 19:00 WIB" required>
+            </div>
+            <div class="form-group">
+                <label>Harga Tiket</label>
+                <input type="text" id="harga" placeholder="Contoh: 250.000" required>
+            </div>
+            <button type="submit" class="btn-submit" id="btn-jdl">Simpan Jadwal</button>
+        </form>
+    </div>
+
+    <div id="status-msg"></div>
+</div>
+
+<script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbx9JsUb0saYvFnH8vpCn2JZu_AzdrXXXmQIcGfMW0dsTvPndFQC_CtKyLhMx_6Kjd_IEg/exec";
+
+    document.getElementById('form-jadwal').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('btn-jdl');
+        const status = document.getElementById('status-msg');
+        
+        const data = {
+            tujuan: document.getElementById('tujuan').value,
+            namaPO: document.getElementById('namaPO').value,
+            jam: document.getElementById('jam').value,
+            harga: document.getElementById('harga').value
+        };
+
+        btn.disabled = true;
+        btn.innerText = "Mengirim...";
+        status.style.display = "block";
+        status.innerText = "Sedang memproses...";
+        status.style.color = "#4A5568";
+
+        try {
+            // Gunakan metode POST ke Google Apps Script
+            const response = await fetch(API_URL, {
+                method: "POST",
+                mode: "no-cors", // Penting untuk Google Apps Script
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            // Karena no-cors, kita tidak bisa baca response body, 
+            // tapi jika tidak ada error catch, biasanya berhasil.
+            status.innerText = "✅ Data Berhasil Masuk ke Sheet!";
+            status.style.color = "green";
+            document.getElementById('form-jadwal').reset();
+        } catch (error) {
+            status.innerText = "❌ Gagal: " + error.message;
+            status.style.color = "red";
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "Simpan Jadwal";
+        }
+    });
+</script>
+
+</body>
+</html>
