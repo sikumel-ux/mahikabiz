@@ -16,7 +16,6 @@
                 <h1 class="logo-text">MAHIKA <span class="accent-text">Trans</span></h1>
                 <p class="tagline">Official Reservation Partner</p>
             </div>
-            
             <div class="info-bar-center">
                 <span id="header-date">--</span>
                 <span class="dot">•</span>
@@ -25,26 +24,40 @@
                 <span id="header-weather"><i class="fas fa-sun"></i> --°C</span>
             </div>
         </div>
-        
         <div class="curve-container">
             <svg class="curve" viewBox="0 0 1440 320"><path fill="#003B73" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160V0H1360C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0H0Z"></path></svg>
         </div>
-
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" id="search-input" placeholder="Mau pergi ke mana hari ini?">
+            <input type="text" id="search-input" placeholder="Cari rute atau PO bus...">
         </div>
     </header>
 
     <main class="app-body">
-        <section class="services-row">
-            <div class="svc-mini"><i class="fas fa-bus"></i> Bus</div>
-            <div class="svc-mini"><i class="fas fa-shuttle-van"></i> Travel</div>
-            <div class="svc-mini"><i class="fas fa-car"></i> Rental</div>
-            <div class="svc-mini"><i class="fas fa-box"></i> Paket</div>
-        </section>
+        <div id="home-view">
+            <section class="scroll-container">
+                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://picsum.photos/400/200?bus=1');">
+                    <span class="tag">PROMO</span>
+                    <h4>Mudik Lebih Awal</h4>
+                    <p>Cek ketersediaan tiket sekarang!</p>
+                </div>
+                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://picsum.photos/400/200?bus=2');">
+                    <span class="tag">HOT</span>
+                    <h4>Rute Baru</h4>
+                    <p>Kini tersedia trayek Merak - Solo.</p>
+                </div>
+            </section>
+
+            <section class="services-grid">
+                <div class="svc-item"><div class="svc-icon s1"><i class="fas fa-bus"></i></div><span>Tiket</span></div>
+                <div class="svc-item"><div class="svc-icon s2"><i class="fas fa-shuttle-van"></i></div><span>Travel</span></div>
+                <div class="svc-item"><div class="svc-icon s3"><i class="fas fa-car"></i></div><span>Rental</span></div>
+                <div class="svc-item"><div class="svc-icon s4"><i class="fas fa-box"></i></div><span>Paket</span></div>
+            </section>
+        </div>
 
         <section class="catalog-section">
+            <h3 id="section-title" style="padding: 10px 20px; font-size: 0.9rem;">Rute Populer</h3>
             <div id="bus-grid" class="product-grid-3col">
                 </div>
         </section>
@@ -52,22 +65,20 @@
         <div class="ticker-container">
             <div class="ticker-wrap">
                 <div class="ticker">
-                    <span>MURNI JAYA</span>
-                    <span>AGRA MAS</span>
-                    <span>PUTRA REMAJA</span>
-                    <span>RAMAYANA</span>
-                    <span>SINAR JAYA</span>
-                    <span>PAHALA KENCANA</span>
-                    <span>HARAPAN JAYA</span>
-                    <span>MURNI JAYA</span>
-                    <span>AGRA MAS</span>
-                    <span>PUTRA REMAJA</span>
-                    <span>RAMAYANA</span>
-                    <span>SINAR JAYA</span>
+                    <span>MURNI JAYA</span> <span>AGRA MAS</span> <span>PUTRA REMAJA</span> <span>RAMAYANA</span> 
+                    <span>SINAR JAYA</span> <span>PAHALA KENCANA</span> <span>HARAPAN JAYA</span> 
+                    <span>MURNI JAYA</span> <span>AGRA MAS</span> <span>PUTRA REMAJA</span> <span>RAMAYANA</span>
                 </div>
             </div>
         </div>
     </main>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-history"></i><span>Pesanan</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-tags"></i><span>Promo</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-user"></i><span>Akun</span></a>
+    </nav>
 
     <div id="modal-profile" class="modal">
         <div class="modal-content">
@@ -78,5 +89,4 @@
 
     <script src="script.js"></script>
 </body>
-    </html>
-    
+</html>
