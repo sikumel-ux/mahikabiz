@@ -13,8 +13,8 @@
     <header class="main-header">
         <div class="header-content-center">
             <div class="branding-center">
-                <h1 class="logo-text">MAHIKA <span class="accent-text">Trans</span></h1>
-                <p class="tagline">Official Reservation Partner</p>
+                <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Trans</span></h1>
+                <p class="tagline-yellow">Official Reservation Partner</p>
             </div>
             
             <div class="info-bar-center">
@@ -27,14 +27,12 @@
         </div>
 
         <div class="curve-container">
-            <svg class="curve" viewBox="0 0 1440 320">
-                <path fill="#003B73" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160V0H1360C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0H0Z"></path>
-            </svg>
+            <svg class="curve" viewBox="0 0 1440 320"><path fill="#003B73" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160V0H1360C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0H0Z"></path></svg>
         </div>
 
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" id="search-input" placeholder="Mau pergi ke mana hari ini?">
+            <input type="text" id="search-input" placeholder="Cari rute atau berita...">
         </div>
     </header>
 
@@ -42,48 +40,46 @@
         
         <div id="home-view">
             <section class="scroll-container">
-                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=400&q=80');">
+                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400');">
                     <span class="tag">PROMO</span>
-                    <h4>Diskon Akhir Tahun</h4>
-                    <p>Cek rute favoritmu sekarang!</p>
+                    <h4>Diskon Mudik</h4>
+                    <p>Booking sekarang lebih hemat.</p>
                 </div>
-                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=400&q=80');">
-                    <span class="tag">HOT</span>
+                <div class="promo-card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=400');">
+                    <span class="tag">INFO</span>
                     <h4>Rute Sumatera</h4>
-                    <p>Kini tersedia via Tol Trans Sumatera.</p>
+                    <p>Pelayanan prima setiap hari.</p>
                 </div>
             </section>
 
             <section class="services-grid">
-                <div class="svc-item"><div class="svc-icon s1"><i class="fas fa-bus"></i></div><span>Tiket Bus</span></div>
+                <div class="svc-item"><div class="svc-icon s1"><i class="fas fa-bus"></i></div><span>Tiket</span></div>
                 <div class="svc-item"><div class="svc-icon s2"><i class="fas fa-shuttle-van"></i></div><span>Travel</span></div>
                 <div class="svc-item"><div class="svc-icon s3"><i class="fas fa-car"></i></div><span>Rental</span></div>
-                <div class="svc-item"><div class="svc-icon s4"><i class="fas fa-box"></i></div><span>Kirim Paket</span></div>
+                <div class="svc-item"><div class="svc-icon s4"><i class="fas fa-box"></i></div><span>Paket</span></div>
             </section>
         </div>
 
         <section class="catalog-section">
-            <h3 id="section-title" style="padding: 0 20px 15px; font-size: 1rem; color: #003B73;">Rute Populer</h3>
-            
+            <h3 id="section-title" class="section-label">Rute Populer</h3>
             <div id="bus-grid" class="product-grid-3col">
-                <p style="grid-column: 1/-1; text-align: center; padding: 20px; color: #718096;">Memuat jadwal...</p>
-            </div>
+                </div>
+        </section>
+
+        <section class="news-section">
+            <h3 class="section-label">Mahika News</h3>
+            <div id="news-list" class="news-container">
+                </div>
         </section>
 
         <div class="ticker-container">
-            <div class="ticker-wrap">
-                <div class="ticker">
-                    <span>MURNI JAYA</span> <span>AGRA MAS</span> <span>PUTRA REMAJA</span> <span>RAMAYANA</span> 
-                    <span>SINAR JAYA</span> <span>PAHALA KENCANA</span> <span>HARAPAN JAYA</span> 
-                    <span>MURNI JAYA</span> <span>AGRA MAS</span> <span>PUTRA REMAJA</span> <span>RAMAYANA</span>
-                </div>
-            </div>
+            <div class="ticker-wrap"><div class="ticker" id="ticker-content"></div></div>
         </div>
     </main>
 
     <nav class="bottom-nav">
         <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="#" class="nav-item"><i class="fas fa-history"></i><span>Pesanan</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-newspaper"></i><span>Berita</span></a>
         <a href="#" class="nav-item"><i class="fas fa-tags"></i><span>Promo</span></a>
         <a href="#" class="nav-item"><i class="fas fa-user"></i><span>Akun</span></a>
     </nav>
@@ -91,12 +87,10 @@
     <div id="modal-profile" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">&times;</button>
-            <div id="profile-detail">
-                </div>
+            <div id="profile-detail"></div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-    </html>
-    
+</html>
