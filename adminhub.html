@@ -3,70 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin MAHIKA</title>
+    <title>Admin Dashboard MAHIKA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: #F5F7FA; padding: 20px; }
-        .card { max-width: 500px; margin: 20px auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        h2 { color: #003B73; text-align: center; }
-        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #E2E8F0; border-radius: 12px; box-sizing: border-box; }
-        .btn { width: 100%; background: #003B73; color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        :root { --p-dark: #003B73; --accent: #FFC107; --bg: #F5F7FA; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
+        header { background: var(--p-dark); color: white; padding: 20px; text-align: center; }
+        .container { padding: 15px; max-width: 600px; margin: auto; }
+        .card { background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+        .btn-primary { background: var(--p-dark); color: white; }
+        .btn-danger { background: #E53E3E; color: white; width: auto; padding: 5px 10px; font-size: 0.7rem; }
+        .btn-edit { background: #3182CE; color: white; width: auto; padding: 5px 10px; font-size: 0.7rem; margin-right: 5px; }
+        
+        /* List Style */
+        .list-item { display: flex; align-items: center; border-bottom: 1px solid #eee; padding: 10px 0; }
+        .list-item img { width: 50px; height: 50px; border-radius: 8px; margin-right: 12px; object-fit: cover; }
+        .list-info { flex: 1; }
+        .list-info h4 { margin: 0; font-size: 0.9rem; }
+        .list-info p { margin: 0; font-size: 0.75rem; color: #666; }
+
+        /* Nav Bawah Admin */
+        .admin-nav { position: fixed; bottom: 0; width: 100%; height: 60px; background: white; display: flex; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+        .nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #999; font-size: 0.7rem; font-weight: 700; }
+        .nav-tab.active { color: var(--p-dark); }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Input Jadwal Bus</h2>
-    <form id="formJadwal">
-        <input type="text" id="tujuan" placeholder="Kota Tujuan" required>
-        <input type="text" id="namaPO" placeholder="Nama PO" required>
-        <input type="text" id="jam" placeholder="Jam (Contoh: 12:00)" required>
-        <input type="number" id="harga" placeholder="Harga (Angka saja)" required>
-        <input type="text" id="fotoBus" placeholder="Link Foto Bus">
-        <button type="submit" class="btn">Simpan Jadwal</button>
-    </form>
+<header>
+    <h2>Admin <span style="color:var(--accent)">MAHIKA</span></h2>
+</header>
+
+<div class="container">
+    <div id="sec-jadwal">
+        <div class="card">
+            <h3 id="form-title-jdl">Tambah Jadwal Bus</h3>
+            <form id="formJadwal">
+                <input type="hidden" id="editRowJdl" value="-1">
+                <input type="text" id="tujuan" placeholder="Kota Tujuan" required>
+                <input type="text" id="namaPO" placeholder="Nama PO" required>
+                <input type="text" id="jam" placeholder="Jam (12:00)">
+                <input type="number" id="harga" placeholder="Harga">
+                <label style="font-size: 0.7rem;">Foto Bus:</label>
+                <input type="file" id="fileBus" accept="image/*">
+                <button type="submit" class="btn btn-primary" id="btnJdl">Simpan Jadwal</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>Daftar Jadwal</h3>
+            <div id="list-jadwal">Memuat data...</div>
+        </div>
+    </div>
+
+    <div id="sec-news" class="hidden">
+        <div class="card">
+            <h3 id="form-title-news">Tambah Mahika News</h3>
+            <form id="formNews">
+                <input type="hidden" id="editRowNews" value="-1">
+                <input type="text" id="judul" placeholder="Judul Berita" required>
+                <textarea id="isi" placeholder="Ringkasan Berita" rows="3" required></textarea>
+                <label style="font-size: 0.7rem;">Foto Berita:</label>
+                <input type="file" id="fileNews" accept="image/*">
+                <button type="submit" class="btn btn-primary" id="btnNews" style="background:var(--accent); color:black;">Posting Berita</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>Daftar Berita</h3>
+            <div id="list-news">Memuat data...</div>
+        </div>
+    </div>
 </div>
 
-<div class="card">
-    <h2>Input Mahika News</h2>
-    <form id="formNews">
-        <input type="text" id="judul" placeholder="Judul Berita" required>
-        <textarea id="isi" placeholder="Ringkasan Berita" rows="3" required></textarea>
-        <input type="text" id="fotoNews" placeholder="Link Foto Berita">
-        <button type="submit" class="btn" style="background: #FFC107; color: #000;">Posting Berita</button>
-    </form>
-</div>
+<nav class="admin-nav">
+    <a href="#" class="nav-tab active" onclick="showSec('jadwal')"><i class="fas fa-bus"></i><span>Jadwal</span></a>
+    <a href="#" class="nav-tab" onclick="showSec('news')"><i class="fas fa-newspaper"></i><span>News</span></a>
+</nav>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxb86eZnUZvSYWRkX2uSxohRzien9x1zHyu1XZGkKCV8tekejSG8DygZTdI3bEkDThF0Q/exec";
+    const API_URL = "GANTI_DENGAN_URL_WEB_APP_BARU_ANDA";
+    let db = { jadwal: [], news: [] };
 
-    async function kirim(payload) {
-        alert("Sedang mengirim...");
+    // TABS LOGIC
+    function showSec(name) {
+        document.getElementById('sec-jadwal').classList.toggle('hidden', name !== 'jadwal');
+        document.getElementById('sec-news').classList.toggle('hidden', name !== 'news');
+        document.querySelectorAll('.nav-tab').forEach((t, i) => t.classList.toggle('active', (i===0 && name==='jadwal') || (i===1 && name==='news')));
+    }
+
+    // LOAD DATA
+    async function loadData() {
+        const res = await fetch(API_URL);
+        db = await res.json();
+        renderList();
+    }
+
+    function renderList() {
+        document.getElementById('list-jadwal').innerHTML = db.jadwal.map((item, idx) => `
+            <div class="list-item">
+                <img src="${item.Foto || ''}">
+                <div class="list-info">
+                    <h4>${item.Tujuan} - ${item["Nama PO"]}</h4>
+                    <p>Rp ${item.Harga} | ${item.Jam}</p>
+                    <button class="btn-edit" onclick="editJdl(${idx})">Edit</button>
+                    <button class="btn-danger" onclick="hapus('jadwal', ${idx})">Hapus</button>
+                </div>
+            </div>
+        `).join('');
+
+        document.getElementById('list-news').innerHTML = db.news.map((item, idx) => `
+            <div class="list-item">
+                <img src="${item.Foto || ''}">
+                <div class="list-info">
+                    <h4>${item.Judul}</h4>
+                    <p>${item.Isi.substring(0, 40)}...</p>
+                    <button class="btn-edit" onclick="editNews(${idx})">Edit</button>
+                    <button class="btn-danger" onclick="hapus('news', ${idx})">Hapus</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // UPLOAD LOGIC
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = e => reject(e);
+    });
+
+    async function submitForm(type, payload, fileInput) {
+        if(fileInput.files[0]) {
+            payload.fileData = await toBase64(fileInput.files[0]);
+            payload.fileName = fileInput.files[0].name;
+        }
         await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
         alert("Berhasil!");
         location.reload();
     }
 
-    document.getElementById('formJadwal').onsubmit = (e) => {
+    document.getElementById('formJadwal').onsubmit = async (e) => {
         e.preventDefault();
-        kirim({
+        const rowIdx = parseInt(document.getElementById('editRowJdl').value);
+        const payload = {
             type: "jadwal",
+            action: rowIdx > -1 ? "edit" : "add",
+            rowIdx: rowIdx,
             tujuan: document.getElementById('tujuan').value,
             namaPO: document.getElementById('namaPO').value,
             jam: document.getElementById('jam').value,
             harga: document.getElementById('harga').value,
-            foto: document.getElementById('fotoBus').value
-        });
-    };
+            oldFoto: rowIdx > -1 ? db.jadwal[rowIdx].Foto : ""
+        };
+        await submitForm("jadwal", payload, document.getElementById('fileBus'));
+    }
 
-    document.getElementById('formNews').onsubmit = (e) => {
-        e.preventDefault();
-        kirim({
-            type: "news",
-            judul: document.getElementById('judul').value,
-            isi: document.getElementById('isi').value,
-            foto: document.getElementById('fotoNews').value
-        });
-    };
+    // EDIT & HAPUS
+    function editJdl(idx) {
+        const item = db.jadwal[idx];
+        document.getElementById('editRowJdl').value = idx;
+        document.getElementById('tujuan').value = item.Tujuan;
+        document.getElementById('namaPO').value = item["Nama PO"];
+        document.getElementById('jam').value = item.Jam;
+        document.getElementById('harga').value = item.Harga;
+        document.getElementById('form-title-jdl').innerText = "Edit Jadwal";
+        window.scrollTo(0,0);
+    }
+
+    async function hapus(type, idx) {
+        if(!confirm("Yakin hapus data ini?")) return;
+        await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({type, action: "delete", rowIdx: idx}) });
+        location.reload();
+    }
+
+    loadData();
 </script>
 </body>
 </html>
