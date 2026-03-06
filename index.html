@@ -25,6 +25,33 @@
 </div>
 
 <div class="container">
+
+
+    <div class="main-services">
+        <div class="service-item" onclick="filterService('bus')">
+            <div class="service-icon bg-blue"><i class="fas fa-bus"></i></div>
+            <span>BUS</span>
+        </div>
+        <div class="service-item" onclick="filterService('travel')">
+            <div class="service-icon bg-orange"><i class="fas fa-shuttle-van"></i></div>
+            <span>TRAVEL</span>
+        </div>
+        <div class="service-item" onclick="filterService('kapal')">
+            <div class="service-icon bg-teal"><i class="fas fa-ship"></i></div>
+            <span>KAPAL</span>
+        </div>
+        <div class="service-item" onclick="filterService('pesawat')">
+            <div class="service-icon bg-red"><i class="fas fa-plane"></i></div>
+            <span>PESAWAT</span>
+        </div>
+    </div>
+
+    <div class="section-label"><i class="fas fa-bus"></i> Rute Populer</div>
+    <div class="bus-grid" id="bus-list"></div>
+    ...
+</div>
+    
+    
     <div class="section-label"><i class="fas fa-star"></i> Promo</div>
     <div class="promo-slider" id="promo-list"></div>
 
