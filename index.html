@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHIKA Trans - Reservasi</title>
+    <title>MAHIKA Trans - Official Reservation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -19,8 +19,8 @@
 
 <div class="search-container">
     <div class="search-box">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="search-input" placeholder="Cari rute atau PO bus...">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Cari rute atau PO bus..." onkeypress="handleSearch(event)">
     </div>
 </div>
 
@@ -42,26 +42,19 @@
     <div id="news-list"></div>
 </div>
 
-<div class="marquee-wrapper">
-    <div class="marquee-content" id="marquee-po">
-        </div>
+<div class="marquee-section">
+    <div class="section-label" style="padding-left:20px"><i class="fas fa-id-badge"></i> Partner PO Bus</div>
+    <div class="marquee-wrapper">
+        <div class="marquee-content" id="marquee-po"></div>
+    </div>
 </div>
 
 <nav class="bottom-nav">
     <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="#search-input" class="nav-item"><i class="fas fa-search"></i><span>Search</span></a>
-    <a href="#" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Jadwal</span></a>
+    <a href="javascript:void(0)" onclick="document.getElementById('search-input').focus()" class="nav-item"><i class="fas fa-search"></i><span>Search</span></a>
+    <a href="search/" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Jadwal</span></a>
     <a href="https://wa.me/6285156677461" class="nav-item"><i class="fas fa-phone-alt"></i><span>Kontak</span></a>
 </nav>
-
-<div id="news-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeNews()">&times;</span>
-        <img id="modal-img" src="">
-        <h3 id="modal-judul"></h3>
-        <p id="modal-desk"></p>
-    </div>
-</div>
 
 <script src="script.js"></script>
 </body>
