@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - MAHIKA Trans</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <style>
+        :root { --p-dark: #003B73; --accent: #FFC107; --bg: #F5F7FA; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); padding-bottom: 90px; }
+
+        /* HEADER */
+        .admin-header { background: var(--p-dark); padding: 30px 20px; text-align: center; color: white; border-radius: 0 0 25px 25px; }
+        .admin-header h1 { font-size: 1.5rem; font-weight: 900; color: var(--accent); }
+        .admin-header p { font-size: 0.8rem; opacity: 0.8; margin-top: 5px; }
+
+        /* CONTAINER FORM */
+        .container { padding: 20px; }
+        .section-panel { display: none; animation: slideUp 0.3s ease; }
+        .section-panel.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .form-card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .form-card h3 { color: var(--p-dark); margin-bottom: 15px; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+        
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.75rem; font-weight: 700; color: #666; margin-bottom: 5px; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #eee; border-radius: 12px; background: #f9f9f9; font-size: 0.9rem; outline: none; }
+        input:focus { border-color: var(--p-dark); background: white; }
+
+        .btn-submit { background: var(--p-dark); color: var(--accent); width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; }
+
+        /* HASIL INPUT (LIST) */
+        .list-title { font-weight: 800; font-size: 0.9rem; color: var(--p-dark); margin: 20px 0 10px; }
+        .data-item { background: white; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-left: 4px solid var(--accent); }
+        .item-info b { font-size: 0.9rem; color: var(--p-dark); display: block; }
+        .item-info span { font-size: 0.7rem; color: #888; }
+        .btn-del { color: #ff4d4d; border: none; background: #fff5f5; padding: 8px; border-radius: 8px; cursor: pointer; }
+
+        /* BOTTOM NAV */
+        .admin-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; height: 75px; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 1000; }
+        .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #A0AEC0; font-size: 0.65rem; font-weight: 700; gap: 5px; border: none; background: none; cursor: pointer; }
+        .nav-item.active { color: var(--p-dark); }
+        .nav-item i { font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+<header class="admin-header">
+    <h1>MAHIKA ADMIN</h1>
+    <p id="current-tab-name">Manajemen Jadwal</p>
+</header>
+
+<div class="container">
+
+    <div id="panel-jadwal" class="section-panel active">
+        <div class="form-card">
+            <h3><i class="fas fa-bus"></i> Input Jadwal</h3>
+            <div class="input-group"><label>Nama PO</label><input type="text" id="j-po"></div>
+            <div class="input-group"><label>Tujuan</label><input type="text" id="j-tujuan"></div>
+            <div class="input-group"><label>Jam & Harga</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="j-jam" placeholder="20:00">
+                    <input type="number" id="j-harga" placeholder="Harga">
+                </div>
+            </div>
+            <div class="input-group"><label>URL Foto</label><input type="text" id="j-foto"></div>
+            <button class="btn-submit" onclick="saveJadwal()">SIMPAN JADWAL</button>
+        </div>
+        <div class="list-title">Daftar Jadwal</div>
+        <div id="list-jadwal"></div>
+    </div>
+
+    <div id="panel-partner" class="section-panel">
+        <div class="form-card">
+            <h3><i class="fas fa-handshake"></i> Partner Marquee</h3>
+            <div class="input-group"><label>Nama PO Partner</label><input type="text" id="p-nama" placeholder="Contoh: PO HARYANTO"></div>
+            <button class="btn-submit" onclick="savePartner()">TAMBAH KE RUNNING TEXT</button>
+        </div>
+        <div class="list-title">Partner Aktif</div>
+        <div id="list-partner"></div>
+    </div>
+
+    <div id="panel-news" class="section-panel">
+        <div class="form-card">
+            <h3><i class="fas fa-newspaper"></i> Buat Berita</h3>
+            <div class="input-group"><label>Judul Berita</label><input type="text" id="n-judul"></div>
+            <div class="input-group"><label>Isi Berita</label><textarea id="n-isi" rows="4"></textarea></div>
+            <div class="input-group"><label>URL Foto</label><input type="text" id="n-foto"></div>
+            <button class="btn-submit" onclick="saveNews()">PUBLISH NEWS</button>
+        </div>
+        <div class="list-title">Berita Terbit</div>
+        <div id="list-news"></div>
+    </div>
+
+</div>
+
+<nav class="admin-nav">
+    <button class="nav-item active" onclick="switchTab('panel-jadwal', 'Manajemen Jadwal', this)">
+        <i class="fas fa-calendar-alt"></i><span>Jadwal</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('panel-partner', 'Partner Marquee', this)">
+        <i class="fas fa-handshake"></i><span>Partner</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('panel-news', 'Update Berita', this)">
+        <i class="fas fa-newspaper"></i><span>News</span>
+    </button>
+    <button class="nav-item" onclick="window.location.href='index.html'">
+        <i class="fas fa-external-link-alt"></i><span>Lihat Web</span>
+    </button>
+</nav>
+
+<script src="cp.js"></script>
+</body>
+  </html>
+      
