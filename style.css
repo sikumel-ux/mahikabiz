@@ -43,7 +43,7 @@ body { background: var(--bg); padding-bottom: 100px; overflow-x: hidden; }
 .marquee-wrapper { 
     overflow: hidden; 
     display: flex; 
-    background: #fff; 
+    background: transparent; 
     padding: 10px 0; /* Dikurangi dari 15px */
     border-top: 1px solid #eee; 
     border-bottom: 1px solid #eee; 
