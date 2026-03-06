@@ -1,55 +1,247 @@
 :root {
-    --p-dark: #003B73; --accent: #FFC107; --bg: #F5F7FA; --white: #FFFFFF;
+    --p-dark: #003B73;
+    --accent: #FFC107;
+    --bg: #F5F7FA;
+    --white: #ffffff;
+    --gray: #A0AEC0;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-body { background: var(--bg); padding-bottom: 100px; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
 
-/* Header & Logo */
-.main-header { background: var(--p-dark); padding: 50px 20px 80px; text-align: center; position: relative; }
-.logo-text { font-size: 2.2rem; font-weight: 800; }
-.m-yellow { color: var(--accent); } .m-white { color: var(--white); }
-.tagline-yellow { color: var(--accent); font-size: 0.75rem; font-weight: 700; margin-top: 5px; }
+body {
+    background: var(--bg);
+    padding-bottom: 90px;
+}
 
-.search-box { position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); width: 85%; background: white; height: 50px; border-radius: 25px; display: flex; align-items: center; padding: 0 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); z-index: 10; }
-.search-box input { border: none; outline: none; margin-left: 10px; width: 100%; }
+/* --- HEADER & LOGO --- */
+.main-header {
+    background: var(--p-dark);
+    padding: 50px 20px 80px;
+    text-align: center;
+    position: relative;
+    border-radius: 0 0 30px 30px;
+}
 
-/* Promo Slider */
-.scroll-container { display: flex; overflow-x: auto; gap: 15px; padding: 40px 20px 20px; scrollbar-width: none; }
-.promo-card { min-width: 260px; height: 160px; border-radius: 20px; background-size: cover; background-position: center; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; color: white; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; }
-.promo-card h4 { font-size: 1rem; margin-bottom: 5px; }
-.promo-card p { font-size: 0.75rem; text-align: justify; line-height: 1.3; opacity: 0.9; }
+.logo-text {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+}
 
-/* Catalog & Grid */
-.section-label { padding: 20px 20px 10px; font-size: 1rem; color: var(--p-dark); font-weight: 800; }
-.product-grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 15px; }
-.bus-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; }
-.card-img { width: 100%; height: 75px; object-fit: cover; border-bottom: 2px solid var(--accent); }
+.m-yellow { color: var(--accent); }
+.m-white { color: #fff; }
 
-/* News Section */
-.news-container { padding: 0 15px; }
-.news-item { background: white; display: flex; border-radius: 15px; margin-bottom: 12px; overflow: hidden; border: 1px solid #eee; }
-.news-img { width: 100px; height: 100px; object-fit: cover; }
-.news-info { padding: 12px; flex: 1; }
-.news-info h4 { font-size: 0.85rem; color: var(--p-dark); margin-bottom: 5px; }
-.news-info p { font-size: 0.75rem; color: #555; text-align: justify; line-height: 1.4; }
+.tagline-yellow {
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-top: 5px;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
 
-/* PO Ticker (Card Style) */
-.po-ticker-wrapper { overflow: hidden; padding: 10px 0 30px; }
-.ticker-scroll { display: flex; gap: 15px; padding: 10px 20px; animation: scroll-po 30s linear infinite; width: max-content; }
-.po-badge { background: white; padding: 10px 20px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #eee; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 0.8rem; color: var(--p-dark); }
-.po-badge i { color: var(--accent); }
+/* --- SEARCH BOX --- */
+.search-box {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    background: white;
+    height: 50px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 10;
+}
 
-@keyframes scroll-po { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.search-box input {
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    width: 100%;
+    font-size: 0.9rem;
+}
 
-/* Modal Justify */
-#news-detail-body { text-align: justify; line-height: 1.6; font-size: 0.9rem; }
+.search-icon { color: var(--p-dark); }
 
-/* Nav & Modal basic styles... (sama seperti sebelumnya) */
-.bottom-nav { position: fixed; bottom: 0; width: 100%; height: 70px; background: white; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
-.nav-item { color: #A0AEC0; text-decoration: none; font-size: 0.7rem; display: flex; flex-direction: column; align-items: center; }
+/* --- SECTIONS --- */
+.container { padding: 40px 15px 10px; }
+
+.section-label {
+    font-weight: 800;
+    color: var(--p-dark);
+    margin: 20px 0 10px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- PROMO SLIDER --- */
+.promo-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 10px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+.promo-slider::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome */
+
+.promo-card {
+    min-width: 280px;
+    height: 160px;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    z-index: 1;
+}
+
+.promo-card h4, .promo-card p {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+}
+
+.promo-card p {
+    font-size: 0.75rem;
+    text-align: justify; /* Teks Rata Kanan Kiri */
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+/* --- BUS GRID 3 COL --- */
+.bus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.bus-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.bus-card img {
+    width: 100%;
+    height: 70px;
+    object-fit: cover;
+}
+
+.bus-card-body { padding: 8px; }
+
+.bus-card h4 {
+    font-size: 0.7rem;
+    margin: 0;
+    color: var(--p-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bus-card p {
+    font-size: 0.6rem;
+    margin: 2px 0;
+    color: #777;
+    font-weight: 600;
+}
+
+.bus-price {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #E53E3E;
+    margin-top: 4px;
+}
+
+/* --- NEWS ITEM --- */
+.news-item {
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    cursor: pointer;
+}
+
+.news-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.news-info {
+    padding: 12px;
+    flex: 1;
+}
+
+.news-info h4 {
+    font-size: 0.85rem;
+    margin: 0;
+    color: var(--p-dark);
+}
+
+.news-info p {
+    font-size: 0.75rem;
+    color: #555;
+    text-align: justify; /* Teks Rata Kanan Kiri */
+    line-height: 1.4;
+    margin-top: 5px;
+}
+
+/* --- BOTTOM NAV --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 75px;
+    background: white;
+    display: flex;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+    z-index: 100;
+}
+
+.nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 0.65rem;
+    font-weight: 700;
+    gap: 4px;
+}
+
 .nav-item.active { color: var(--p-dark); }
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-.modal-content { background: white; width: 100%; max-width: 450px; border-radius: 20px; padding: 25px; position: relative; max-height: 80vh; overflow-y: auto; }
-.close-modal { position: absolute; top: 10px; right: 10px; border: none; background: none; font-size: 1.5rem; }
-                    
+.nav-item i { font-size: 1.3rem; }
+    
