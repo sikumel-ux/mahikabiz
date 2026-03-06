@@ -39,12 +39,51 @@ body { background: var(--bg); padding-bottom: 100px; overflow-x: hidden; }
 .news-info h4 { font-size: 0.85rem; color: var(--p-dark); margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-weight: 700; }
 .news-info p { font-size: 0.7rem; color: #888; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 
-/* MARQUEE PO */
-.marquee-wrapper { overflow: hidden; display: flex; background: #fff; padding: 15px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-top: 10px; }
-.marquee-content { display: flex; gap: 20px; animation: run-fast 15s linear infinite; }
-.po-card-mini { min-width: 160px; background: white; padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #f0f0f0; box-shadow: 0 4px 8px rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: center; }
-.po-card-mini span { font-size: 1.1rem; font-weight: 900; color: var(--p-dark); text-transform: uppercase; }
-@keyframes run-fast { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* MARQUEE PO (MINIMALIST VERSION) */
+.marquee-section { 
+    margin: 35px 0; 
+}
+
+.marquee-wrapper { 
+    overflow: hidden; 
+    display: flex; 
+    padding: 10px 0; 
+    background: transparent; /* HAPUS BACKGROUND MEMANJANG */
+    border: none; /* HAPUS BORDER ATAS BAWAH */
+}
+
+.marquee-content { 
+    display: flex; 
+    gap: 15px; 
+    animation: run-fast 15s linear infinite; 
+}
+
+.po-card-mini { 
+    min-width: 120px; /* Lebar card dikurangi */
+    background: white; 
+    padding: 10px 15px; 
+    border-radius: 10px; 
+    text-align: center; 
+    border: 1px solid #eee; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.po-card-mini span { 
+    font-size: 0.85rem; /* UKURAN TEKS DIPERKECIL */
+    font-weight: 800; 
+    color: var(--p-dark); 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+}
+
+@keyframes run-fast { 
+    from { transform: translateX(0); } 
+    to { transform: translateX(-50%); } 
+}
+
 
 /* BOTTOM NAVIGATION */
 .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; height: 75px; box-shadow: 0 -5px 15px rgba(0,0,0,0.08); z-index: 1000; }
