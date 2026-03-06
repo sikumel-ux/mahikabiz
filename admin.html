@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin MAHIKA - Auto Upload GDrive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+    <style>
+        :root { --p-dark: #003B73; --accent: #FFC107; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; margin: 0; padding-bottom: 80px; }
+        header { background: var(--p-dark); color: white; padding: 20px; text-align: center; border-radius: 0 0 20px 20px; }
+        .container { max-width: 500px; margin: auto; padding: 15px; }
+        .card { background: white; padding: 20px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; background: var(--p-dark); color: white; transition: 0.3s; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+        .nav-bottom { position: fixed; bottom: 0; width: 100%; background: white; display: flex; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
+        .nav-btn { flex: 1; padding: 18px; text-align: center; cursor: pointer; color: #a0aec0; font-weight: 700; }
+        .nav-btn.active { color: var(--p-dark); border-top: 4px solid var(--p-dark); }
+        .hidden { display: none; }
+        .item-list { margin-top: 10px; border-top: 1px solid #eee; }
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f9f9f9; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div id="loader">
+    <i class="fas fa-spinner fa-spin fa-3x" style="color:var(--p-dark)"></i>
+    <p id="loader-text" style="margin-top:15px; font-weight:700;">Sedang Memproses...</p>
+</div>
+
+<header>
+    <h2>MAHIKA <span style="color:var(--accent)">ADMIN</span></h2>
+</header>
+
+<div class="container">
+    <div id="tab-jadwal">
+        <div class="card">
+            <h3><i class="fas fa-bus"></i> Tambah Jadwal</h3>
+            <input type="text" id="tujuan" placeholder="Tujuan (Solo - Jakarta)">
+            <input type="text" id="namaPO" placeholder="Nama PO">
+            <input type="number" id="harga" placeholder="Harga Tiket">
+            <label style="font-size:0.8rem; font-weight:700;">Upload Foto Bus ke GDrive:</label>
+            <input type="file" id="fBus" accept="image/*">
+            <button class="btn" onclick="prosesSimpan('jadwal')">UPLOAD & SIMPAN</button>
+        </div>
+        <div class="card">
+            <h4>Daftar Jadwal</h4>
+            <div id="list-jadwal" class="item-list"></div>
+        </div>
+    </div>
+
+    <div id="tab-news" class="hidden">
+        <div class="card">
+            <h3><i class="fas fa-newspaper"></i> Posting Berita</h3>
+            <input type="text" id="judul" placeholder="Judul Berita">
+            <textarea id="isi" placeholder="Isi Berita..." rows="4"></textarea>
+            <label style="font-size:0.8rem; font-weight:700;">Upload Foto Berita ke GDrive:</label>
+            <input type="file" id="fNews" accept="image/*">
+            <button class="btn" onclick="prosesSimpan('news')" style="background:var(--accent); color:black">PUBLISH NEWS</button>
+        </div>
+        <div class="card">
+            <h4>Arsip Berita</h4>
+            <div id="list-news" class="item-list"></div>
+        </div>
+    </div>
+</div>
+
+<nav class="nav-bottom">
+    <div class="nav-btn active" onclick="showTab('jadwal', this)">JADWAL</div>
+    <div class="nav-btn" onclick="showTab('news', this)">NEWS</div>
+</nav>
+
+<script>
+    // --- KONFIGURASI ---
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbwT41qhmkb4qp8IyAYElixThUr7DVoloElrfXMNXzfb0L2GYRQ21QWLEDvbgjbmH2z6bw/exec";
+    const firebaseConfig = {
+        apiKey: "AIzaSyBZNupFpsHWibTfthCtiGc8mzB2q0QaOqY",
+        authDomain: "mahikabiz.firebaseapp.com",
+        databaseURL: "https://mahikabiz-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "mahikabiz",
+        storageBucket: "mahikabiz.firebasestorage.app",
+        messagingSenderId: "795712739200",
+        appId: "1:795712739200:web:5cb7b9627ffccb14f29365"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function showTab(id, el) {
+        document.getElementById('tab-jadwal').classList.add('hidden');
+        document.getElementById('tab-news').classList.add('hidden');
+        document.getElementById('tab-' + id).classList.remove('hidden');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    // Fungsi konversi file ke Base64 agar bisa dikirim ke GAS
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+
+    async function prosesSimpan(type) {
+        const fileInput = type === 'jadwal' ? document.getElementById('fBus') : document.getElementById('fNews');
+        const file = fileInput.files[0];
+        if(!file) return alert("Pilih foto dulu, bro!");
+
+        const loader = document.getElementById('loader');
+        const loaderText = document.getElementById('loader-text');
+        
+        loader.style.display = 'flex';
+        loaderText.innerText = "Sedang mengupload foto ke GDrive...";
+
+        try {
+            // 1. Upload ke Google Drive via GAS
+            const base64 = await toBase64(file);
+            const response = await fetch(GAS_URL, {
+                method: "POST",
+                body: JSON.stringify({
+                    fileData: base64,
+                    fileName: file.name,
+                    mimeType: file.type
+                })
+            });
+            const photoUrl = await response.text();
+
+            if(!photoUrl.includes("http")) throw new Error("Gagal mendapatkan link GDrive");
+
+            loaderText.innerText = "Foto Berhasil! Menyimpan data ke Firebase...";
+
+            // 2. Simpan Data ke Firebase Realtime Database
+            if(type === 'jadwal') {
+                await db.ref('jadwal').push({
+                    tujuan: document.getElementById('tujuan').value,
+                    namaPO: document.getElementById('namaPO').value,
+                    harga: document.getElementById('harga').value,
+                    foto: photoUrl
+                });
+            } else {
+                await db.ref('news').push({
+                    judul: document.getElementById('judul').value,
+                    isi: document.getElementById('isi').value,
+                    foto: photoUrl,
+                    tanggal: new Date().toLocaleDateString('id-ID')
+                });
+            }
+
+            alert("Data Berhasil Tersimpan!");
+            location.reload();
+        } catch (e) {
+            alert("Error: " + e.message);
+            console.error(e);
+        } finally {
+            loader.style.display = 'none';
+        }
+    }
+
+    // LISTENER REALTIME UNTUK DAFTAR DATA
+    db.ref('jadwal').on('value', snap => {
+        let html = '';
+        snap.forEach(child => {
+            html += `<div class="item-row"><span>${child.val().tujuan}</span><button onclick="hapus('jadwal','${child.key}')">Hapus</button></div>`;
+        });
+        document.getElementById('list-jadwal').innerHTML = html;
+    });
+
+    db.ref('news').on('value', snap => {
+        let html = '';
+        snap.forEach(child => {
+            html += `<div class="item-row"><span>${child.val().judul}</span><button onclick="hapus('news','${child.key}')">Hapus</button></div>`;
+        });
+        document.getElementById('list-news').innerHTML = html;
+    });
+
+    function hapus(path, id) {
+        if(confirm("Hapus data ini?")) db.ref(path).child(id).remove();
+    }
+</script>
+</body>
+</html>
