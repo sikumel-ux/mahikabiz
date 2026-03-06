@@ -3,84 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin MAHIKA - All-in-One</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Admin MAHIKA - GDrive Upload</title>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
     <style>
-        :root { --p-dark: #003B73; --accent: #FFC107; --bg: #f0f4f8; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
-        header { background: var(--p-dark); color: white; padding: 20px; text-align: center; border-radius: 0 0 20px 20px; }
-        .container { max-width: 500px; margin: auto; padding: 15px; }
-        .card { background: white; padding: 20px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h3 { font-size: 1.1rem; color: var(--p-dark); margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 8px; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-size: 0.9rem; }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; background: var(--p-dark); color: white; transition: 0.3s; }
-        .btn:active { transform: scale(0.98); }
-        .nav-bottom { position: fixed; bottom: 0; width: 100%; background: white; display: flex; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 100; }
-        .nav-btn { flex: 1; padding: 18px; text-align: center; cursor: pointer; color: #a0aec0; font-weight: 700; font-size: 0.75rem; }
-        .nav-btn.active { color: var(--p-dark); border-top: 4px solid var(--p-dark); }
-        .hidden { display: none; }
-        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
-        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; font-size: 0.85rem; }
-        .btn-del { background: #fee2e2; color: #ef4444; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
+        body { font-family: sans-serif; background: #f0f4f8; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 15px; max-width: 500px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; }
+        button { width: 100%; padding: 12px; background: #003B73; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        #loader { display: none; text-align: center; margin-top: 10px; color: #003B73; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div id="loader">
-    <i class="fas fa-circle-notch fa-spin fa-3x" style="color:var(--p-dark)"></i>
-    <p id="loader-text" style="margin-top:15px; font-weight:800; color:var(--p-dark)">Sedang Upload...</p>
+<div class="card">
+    <h2 style="text-align:center">MAHIKA ADMIN</h2>
+    <select id="type" onchange="toggleForm()">
+        <option value="jadwal">Input Jadwal Bus</option>
+        <option value="news">Input Mahika News</option>
+        <option value="promo">Input Promo Slider</option>
+    </select>
+
+    <div id="f-jadwal">
+        <input type="text" id="tujuan" placeholder="Tujuan (Solo - Jakarta)">
+        <input type="text" id="po" placeholder="Nama PO">
+        <input type="text" id="jam" placeholder="Jam Keberangkatan (cth: 19:00)">
+        <input type="number" id="harga" placeholder="Harga">
+    </div>
+
+    <div id="f-news" style="display:none">
+        <input type="text" id="judul" placeholder="Judul Berita">
+        <textarea id="isi" placeholder="Isi Berita Lengkap..." rows="5"></textarea>
+    </div>
+
+    <div id="f-promo" style="display:none">
+        <select id="slot"><option value="p1">Slot 1</option><option value="p2">Slot 2</option></select>
+        <input type="text" id="pjudul" placeholder="Judul Promo">
+        <textarea id="pdesk" placeholder="Deskripsi Promo" rows="2"></textarea>
+    </div>
+
+    <label>Pilih Foto (Upload ke GDrive):</label>
+    <input type="file" id="fileInp">
+    
+    <button onclick="save()">SIMPAN DATA</button>
+    <div id="loader">Sedang Upload ke GDrive...</div>
 </div>
-
-<header><h2>MAHIKA <span style="color:var(--accent)">ADMIN</span></h2></header>
-
-<div class="container">
-    <div id="tab-jadwal">
-        <div class="card">
-            <h3><i class="fas fa-bus"></i> Tambah Jadwal</h3>
-            <input type="text" id="tujuan" placeholder="Tujuan (cth: Solo - Jakarta)">
-            <input type="text" id="namaPO" placeholder="Nama PO Bus">
-            <input type="number" id="harga" placeholder="Harga Tiket">
-            <input type="file" id="fBus" accept="image/*">
-            <button class="btn" onclick="simpan('jadwal')">UPLOAD & SIMPAN</button>
-        </div>
-        <div id="list-jadwal" class="card"></div>
-    </div>
-
-    <div id="tab-news" class="hidden">
-        <div class="card">
-            <h3><i class="fas fa-newspaper"></i> Posting Berita</h3>
-            <input type="text" id="judul" placeholder="Judul Berita">
-            <textarea id="isi" placeholder="Isi Berita..." rows="4"></textarea>
-            <input type="file" id="fNews" accept="image/*">
-            <button class="btn" onclick="simpan('news')" style="background:var(--accent); color:black">PUBLISH NEWS</button>
-        </div>
-        <div id="list-news" class="card"></div>
-    </div>
-
-    <div id="tab-promo" class="hidden">
-        <div class="card">
-            <h3><i class="fas fa-tags"></i> Kelola Promo Slider</h3>
-            <select id="pSlot">
-                <option value="promo1">Slot Promo 1</option>
-                <option value="promo2">Slot Promo 2</option>
-                <option value="promo3">Slot Promo 3</option>
-            </select>
-            <input type="text" id="pJudul" placeholder="Judul Promo">
-            <textarea id="pDesk" placeholder="Deskripsi Singkat" rows="2"></textarea>
-            <input type="file" id="fPromo" accept="image/*">
-            <button class="btn" onclick="simpan('promo')" style="background:#2ecc71">UPDATE PROMO</button>
-        </div>
-        <div id="list-promo" class="card"></div>
-    </div>
-</div>
-
-<nav class="nav-bottom">
-    <div class="nav-btn active" onclick="tab('jadwal', this)">JADWAL</div>
-    <div class="nav-btn" onclick="tab('news', this)">NEWS</div>
-    <div class="nav-btn" onclick="tab('promo', this)">PROMO</div>
-</nav>
 
 <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbwT41qhmkb4qp8IyAYElixThUr7DVoloElrfXMNXzfb0L2GYRQ21QWLEDvbgjbmH2z6bw/exec";
@@ -93,54 +60,38 @@
         messagingSenderId: "795712739200",
         appId: "1:795712739200:web:5cb7b9627ffccb14f29365"
     };
-
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    function tab(id, el) {
-        ['jadwal','news','promo'].forEach(t => document.getElementById('tab-'+t).classList.add('hidden'));
-        document.getElementById('tab-'+id).classList.remove('hidden');
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
+    function toggleForm() {
+        const t = document.getElementById('type').value;
+        document.getElementById('f-jadwal').style.display = t === 'jadwal' ? 'block' : 'none';
+        document.getElementById('f-news').style.display = t === 'news' ? 'block' : 'none';
+        document.getElementById('f-promo').style.display = t === 'promo' ? 'block' : 'none';
     }
 
-    const toB64 = f => new Promise(res => { const r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(f); });
+    async function save() {
+        const file = document.getElementById('fileInp').files[0];
+        if(!file) return alert("Pilih foto!");
+        document.getElementById('loader').style.display = 'block';
 
-    async function simpan(type) {
-        let fileInput = document.getElementById(type === 'jadwal' ? 'fBus' : (type === 'news' ? 'fNews' : 'fPromo'));
-        if(!fileInput.files[0]) return alert("Pilih foto dulu!");
-
-        const loader = document.getElementById('loader');
-        loader.style.display = 'flex';
-
-        try {
-            // 1. Upload ke GDrive via GAS
-            const base64 = await toB64(fileInput.files[0]);
-            const resp = await fetch(GAS_URL, {
-                method: "POST",
-                body: JSON.stringify({ fileData: base64, fileName: fileInput.files[0].name, mimeType: fileInput.files[0].type })
-            });
-            const photoUrl = await resp.text();
-
-            // 2. Simpan ke Firebase
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = async () => {
+            const resp = await fetch(GAS_URL, { method: "POST", body: JSON.stringify({ fileData: reader.result, fileName: file.name, mimeType: file.type }) });
+            const url = await resp.text();
+            
+            const type = document.getElementById('type').value;
             if(type === 'jadwal') {
-                await db.ref('jadwal').push({ tujuan: document.getElementById('tujuan').value, namaPO: document.getElementById('namaPO').value, harga: document.getElementById('harga').value, foto: photoUrl });
+                await db.ref('jadwal').push({ tujuan: document.getElementById('tujuan').value, namaPO: document.getElementById('po').value, jam: document.getElementById('jam').value, harga: document.getElementById('harga').value, foto: url });
             } else if(type === 'news') {
-                await db.ref('news').push({ judul: document.getElementById('judul').value, isi: document.getElementById('isi').value, foto: photoUrl, tanggal: new Date().toLocaleDateString('id-ID') });
+                await db.ref('news').push({ judul: document.getElementById('judul').value, isi: document.getElementById('isi').value, foto: url, tanggal: new Date().toLocaleDateString('id-ID') });
             } else if(type === 'promo') {
-                await db.ref('promo/' + document.getElementById('pSlot').value).set({ judul: document.getElementById('pJudul').value, desk: document.getElementById('pDesk').value, foto: photoUrl });
+                await db.ref('promo/'+document.getElementById('slot').value).set({ judul: document.getElementById('pjudul').value, desk: document.getElementById('pdesk').value, foto: url });
             }
             alert("Berhasil!"); location.reload();
-        } catch(e) { alert("Error: " + e.message); }
-        finally { loader.style.display = 'none'; }
+        };
     }
-
-    // LISTENER REALTIME
-    db.ref('jadwal').on('value', s => { let h='<h4>Daftar Jadwal</h4>'; s.forEach(c => { h+=`<div class="item-row">${c.val().tujuan} <button class="btn-del" onclick="del('jadwal','${c.key}')">X</button></div>` }); document.getElementById('list-jadwal').innerHTML = h; });
-    db.ref('news').on('value', s => { let h='<h4>Arsip News</h4>'; s.forEach(c => { h+=`<div class="item-row">${c.val().judul} <button class="btn-del" onclick="del('news','${c.key}')">X</button></div>` }); document.getElementById('list-news').innerHTML = h; });
-    db.ref('promo').on('value', s => { let h='<h4>Promo Aktif</h4>'; s.forEach(c => { h+=`<div class="item-row">${c.key.toUpperCase()} <button class="btn-del" onclick="del('promo','${c.key}')">X</button></div>` }); document.getElementById('list-promo').innerHTML = h; });
-
-    function del(p, i) { if(confirm("Hapus?")) db.ref(p).child(i).remove(); }
 </script>
 </body>
 </html>
