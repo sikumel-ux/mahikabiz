@@ -11,144 +11,197 @@
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
         header { background: var(--p-dark); color: white; padding: 25px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
-        .card { background: var(--white); border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
-        .card h3 { margin-top: 0; font-size: 1.1rem; color: var(--p-dark); display: flex; align-items: center; gap: 10px; }
+        
+        .card { background: var(--white); border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #e1e4e8; }
+        .card h3 { margin-top: 0; font-size: 1.1rem; color: var(--p-dark); display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--bg); padding-bottom: 10px; }
+        
         label { display: block; font-size: 0.8rem; font-weight: 700; margin-top: 15px; color: #666; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #EDF2F7; border-radius: 12px; font-size: 0.9rem; box-sizing: border-box; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #EDF2F7; border-radius: 12px; font-size: 0.9rem; box-sizing: border-box; outline: none; }
+        input:focus { border-color: var(--p-dark); }
+        
         .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; }
         .btn-main { background: var(--p-dark); color: white; }
-        .data-list { margin-top: 15px; border-top: 1px solid #eee; }
-        .item-row { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f7f7f7; }
-        .item-row img { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; margin-right: 15px; }
+        .btn-news { background: var(--accent); color: #000; }
+        
+        /* List Style */
+        .data-list { margin-top: 15px; }
+        .item-row { display: flex; align-items: center; padding: 12px; background: #fafafa; border-radius: 12px; margin-bottom: 8px; border: 1px solid #eee; }
+        .item-row img { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; margin-right: 15px; background: #eee; }
         .item-info { flex: 1; }
-        .item-info h4 { margin: 0; font-size: 0.85rem; }
-        .item-actions { display: flex; gap: 5px; }
-        .btn-del { background: #FFF5F5; color: #E53E3E; border: none; padding: 8px; border-radius: 8px; cursor: pointer; }
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 70px; background: var(--white); display: flex; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); }
+        .item-info h4 { margin: 0; font-size: 0.85rem; color: var(--p-dark); }
+        .item-info p { margin: 0; font-size: 0.7rem; color: #888; }
+        .btn-del { background: #FFF5F5; color: #E53E3E; border: none; width: 35px; height: 35px; border-radius: 10px; cursor: pointer; }
+
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 75px; background: var(--white); display: flex; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 100; }
         .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #A0AEC0; font-size: 0.7rem; font-weight: 700; gap: 4px; }
         .nav-item.active { color: var(--p-dark); }
+        .nav-item i { font-size: 1.2rem; }
+
         .hidden { display: none; }
-        #loading { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); display:none; flex-direction:column; justify-content:center; align-items:center; z-index:9999; }
+        #loading { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); display:none; flex-direction:column; justify-content:center; align-items:center; z-index:9999; }
     </style>
 </head>
 <body>
 
 <div id="loading">
-    <i class="fas fa-spinner fa-spin fa-2x" style="color:var(--p-dark)"></i>
-    <p style="margin-top:10px; font-weight:700;">Menghubungkan ke Database...</p>
+    <i class="fas fa-circle-notch fa-spin fa-3x" style="color:var(--p-dark)"></i>
+    <p style="margin-top:15px; font-weight:800; color:var(--p-dark)">Sedang mengirim data...</p>
 </div>
 
 <header>
-    <h2><i class="fas fa-user-shield"></i> ADMIN <span style="color:var(--accent)">MAHIKA</span></h2>
+    <h2><i class="fas fa-shield-alt"></i> MAHIKA <span style="color:var(--accent)">ADMIN</span></h2>
 </header>
 
 <div class="container">
     <div id="sec-promo" class="tab-content">
         <div class="card">
-            <h3><i class="fas fa-ad"></i> Manage Promo Slider (Slot 1-5)</h3>
+            <h3><i class="fas fa-star"></i> Slot Promo Slider</h3>
             <form id="formPromo">
-                <select id="pSlot"><option value="1">Slot 1</option><option value="2">Slot 2</option><option value="3">Slot 3</option><option value="4">Slot 4</option><option value="5">Slot 5</option></select>
+                <label>Pilih Slot (Baris):</label>
+                <select id="pSlot">
+                    <option value="1">Slot 1 (Utama)</option>
+                    <option value="2">Slot 2</option>
+                    <option value="3">Slot 3</option>
+                    <option value="4">Slot 4</option>
+                    <option value="5">Slot 5</option>
+                </select>
                 <input type="text" id="pJudul" placeholder="Judul Promo" required>
-                <textarea id="pDesk" placeholder="Deskripsi Singkat (Justify)" rows="2" required></textarea>
+                <textarea id="pDesk" placeholder="Deskripsi Singkat (Justify)..." rows="2" required></textarea>
+                <label>Ganti Gambar:</label>
                 <input type="file" id="pFoto" accept="image/*">
-                <button type="submit" class="btn btn-main"><i class="fas fa-save"></i> Update Card</button>
+                <button type="submit" class="btn btn-main"><i class="fas fa-upload"></i> Update Promo</button>
             </form>
         </div>
     </div>
 
     <div id="sec-jadwal" class="tab-content hidden">
         <div class="card">
-            <h3><i class="fas fa-bus"></i> Tambah Jadwal Bus</h3>
+            <h3><i class="fas fa-bus"></i> Tambah Jadwal Baru</h3>
             <form id="formJadwal">
-                <input type="text" id="tujuan" placeholder="Rute (Contoh: Solo - Jakarta)" required>
+                <input type="text" id="tujuan" placeholder="Tujuan (Contoh: Solo - Bali)" required>
                 <input type="text" id="namaPO" placeholder="Nama PO Bus" required>
-                <input type="text" id="jam" placeholder="Jam (Contoh: 19:00)">
-                <input type="number" id="harga" placeholder="Harga (Contoh: 250000)">
+                <input type="text" id="jam" placeholder="Jam (Contoh: 15:30 WIB)">
+                <input type="number" id="harga" placeholder="Harga Tiket (Angka saja)">
+                <label>Foto Bus:</label>
                 <input type="file" id="fBus" accept="image/*">
-                <button type="submit" class="btn btn-main"><i class="fas fa-plus"></i> Simpan Jadwal</button>
+                <button type="submit" class="btn btn-main"><i class="fas fa-plus-circle"></i> Tambah Jadwal</button>
             </form>
         </div>
         <div class="card">
-            <h3>Daftar Jadwal</h3>
-            <div id="list-jadwal" class="data-list">Memuat data...</div>
+            <h3>Daftar Rute Aktif</h3>
+            <div id="list-jadwal" class="data-list">Memuat...</div>
         </div>
     </div>
 
     <div id="sec-news" class="tab-content hidden">
         <div class="card">
-            <h3><i class="fas fa-newspaper"></i> Posting Berita</h3>
+            <h3><i class="fas fa-newspaper"></i> Buat Berita Baru</h3>
             <form id="formNews">
                 <input type="text" id="judul" placeholder="Judul Berita" required>
-                <textarea id="isi" placeholder="Isi Berita Lengkap (Justify)" rows="5" required></textarea>
+                <textarea id="isi" placeholder="Isi Berita Lengkap (Justify)..." rows="5" required></textarea>
+                <label>Foto Berita:</label>
                 <input type="file" id="fNews" accept="image/*">
-                <button type="submit" class="btn btn-main" style="background:var(--accent); color:#000;"><i class="fas fa-paper-plane"></i> Posting</button>
+                <button type="submit" class="btn btn-news"><i class="fas fa-paper-plane"></i> Publish Berita</button>
             </form>
         </div>
         <div class="card">
-            <h3>Riwayat Berita</h3>
-            <div id="list-news" class="data-list">Memuat data...</div>
+            <h3>Arsip Berita</h3>
+            <div id="list-news" class="data-list">Memuat...</div>
         </div>
     </div>
 </div>
 
 <nav class="bottom-nav">
-    <a href="javascript:void(0)" class="nav-item active" onclick="showTab('promo', this)"><i class="fas fa-ad"></i><span>Promo</span></a>
-    <a href="javascript:void(0)" class="nav-item" onclick="showTab('jadwal', this)"><i class="fas fa-bus"></i><span>Jadwal</span></a>
-    <a href="javascript:void(0)" class="nav-item" onclick="showTab('news', this)"><i class="fas fa-newspaper"></i><span>News</span></a>
-    <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Web</span></a>
+    <a href="javascript:void(0)" class="nav-item active" onclick="showTab('promo', this)">
+        <i class="fas fa-images"></i><span>Promo</span>
+    </a>
+    <a href="javascript:void(0)" class="nav-item" onclick="showTab('jadwal', this)">
+        <i class="fas fa-route"></i><span>Jadwal</span>
+    </a>
+    <a href="javascript:void(0)" class="nav-item" onclick="showTab('news', this)">
+        <i class="fas fa-bullhorn"></i><span>News</span>
+    </a>
+    <a href="index.html" class="nav-item">
+        <i class="fas fa-eye"></i><span>Lihat Web</span>
+    </a>
 </nav>
 
 <script>
+    // Link API yang kamu berikan
     const API_URL = "https://script.google.com/macros/s/AKfycbxb86eZnUZvSYWRkX2uSxohRzien9x1zHyu1XZGkKCV8tekejSG8DygZTdI3bEkDThF0Q/exec";
-    
-    function showTab(id, el) {
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
-        document.getElementById('sec-' + id).classList.remove('hidden');
+    let db = { jadwal: [], news: [], promo: [] };
+
+    function showTab(tab, el) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById('sec-' + tab).classList.remove('hidden');
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         el.classList.add('active');
-        if(id !== 'promo') refreshData();
+        fetchData(); // Sync data setiap pindah tab
     }
 
-    async function refreshData() {
-        const res = await fetch(API_URL);
-        const db = await res.json();
-        
+    async function fetchData() {
+        try {
+            const res = await fetch(API_URL);
+            db = await res.json();
+            renderLists();
+        } catch (e) { console.error("Gagal load data"); }
+    }
+
+    function renderLists() {
+        // Render List Jadwal
         document.getElementById('list-jadwal').innerHTML = db.jadwal.map((item, idx) => `
             <div class="item-row">
-                <img src="${item.Foto || ''}">
-                <div class="item-info"><h4>${item.Tujuan}</h4><p>${item["Nama PO"]}</p></div>
-                <button class="btn-del" onclick="hapus('jadwal', ${idx})"><i class="fas fa-trash"></i></button>
+                <img src="${item.Foto || 'https://via.placeholder.com/50'}">
+                <div class="item-info">
+                    <h4>${item.Tujuan}</h4>
+                    <p>${item["Nama PO"]} • Rp ${Number(item.Harga).toLocaleString('id-ID')}</p>
+                </div>
+                <button class="btn-del" onclick="hapusData('jadwal', ${idx})"><i class="fas fa-trash"></i></button>
             </div>
         `).join('');
 
+        // Render List News
         document.getElementById('list-news').innerHTML = db.news.map((item, idx) => `
             <div class="item-row">
-                <img src="${item.Foto || ''}">
-                <div class="item-info"><h4>${item.Judul}</h4><p>${item.Isi.substring(0,30)}...</p></div>
-                <button class="btn-del" onclick="hapus('news', ${idx})"><i class="fas fa-trash"></i></button>
+                <img src="${item.Foto || 'https://via.placeholder.com/50'}">
+                <div class="item-info">
+                    <h4>${item.Judul}</h4>
+                    <p>${item.Tanggal}</p>
+                </div>
+                <button class="btn-del" onclick="hapusData('news', ${idx})"><i class="fas fa-trash"></i></button>
             </div>
         `).join('');
     }
 
-    const toBase64 = f => new Promise((res, rej) => {
-        const r = new FileReader(); r.readAsDataURL(f);
-        r.onload = () => res(r.result); r.onerror = e => rej(e);
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
     });
 
-    async function postData(payload, fileInput) {
+    async function send(payload, fileInput) {
         document.getElementById('loading').style.display = 'flex';
         if (fileInput && fileInput.files[0]) {
             payload.fileData = await toBase64(fileInput.files[0]);
             payload.fileName = fileInput.files[0].name;
         }
-        await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
-        alert("Berhasil!");
-        location.reload();
+        
+        try {
+            await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+            alert("Data Berhasil Dikirim ke Sheet!");
+            location.reload();
+        } catch (e) {
+            alert("Gagal mengirim data!");
+            document.getElementById('loading').style.display = 'none';
+        }
     }
 
+    // EVENT HANDLERS
     document.getElementById('formPromo').onsubmit = e => {
         e.preventDefault();
-        postData({
+        send({
             type: "promo",
             slot: document.getElementById('pSlot').value,
             judul: document.getElementById('pJudul').value,
@@ -158,8 +211,9 @@
 
     document.getElementById('formJadwal').onsubmit = e => {
         e.preventDefault();
-        postData({
-            type: "jadwal", action: "add",
+        send({
+            type: "jadwal",
+            action: "add",
             tujuan: document.getElementById('tujuan').value,
             namaPO: document.getElementById('namaPO').value,
             jam: document.getElementById('jam').value,
@@ -169,22 +223,23 @@
 
     document.getElementById('formNews').onsubmit = e => {
         e.preventDefault();
-        postData({
-            type: "news", action: "add",
+        send({
+            type: "news",
+            action: "add",
             judul: document.getElementById('judul').value,
             isi: document.getElementById('isi').value
         }, document.getElementById('fNews'));
     };
 
-    async function hapus(type, idx) {
-        if(!confirm("Hapus data ini?")) return;
+    async function hapusData(type, idx) {
+        if(!confirm("Hapus data ini dari Sheets?")) return;
         document.getElementById('loading').style.display = 'flex';
-        await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({type, action: "delete", rowIdx: idx}) });
+        await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ type, action: "delete", rowIdx: idx }) });
         location.reload();
     }
 
-    window.onload = refreshData;
+    window.onload = fetchData;
 </script>
 </body>
-  </html>
-  
+</html>                                                    </html>
+                                                                 
