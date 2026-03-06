@@ -72,7 +72,7 @@ function init() {
                         <h4>${b.tujuan}</h4>
                         <p style="font-size:0.6rem">${b.namaPO} | ${b.jam || '20:00'}</p>
                         <div class="bus-price">Rp ${Number(b.harga).toLocaleString('id-ID')}</div>
-                        <a href="https://wa.me/6285156677461?text=Halo Mahika, pesan tiket ${b.namaPO} rute ${b.tujuan}" class="btn-wa">BOOKING</a>
+                        <a href="https://wa.me/6281211407667?text=Halo Mahika, pesan tiket ${b.namaPO} rute ${b.tujuan}" class="btn-wa">BOOKING</a>
                     </div>
                 </div>`).join('');
         }
