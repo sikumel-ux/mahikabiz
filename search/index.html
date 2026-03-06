@@ -5,29 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasil Pencarian - MAHIKA Trans</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css"> 
     <link rel="stylesheet" href="search.css">
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 </head>
 <body>
 
-<header class="search-header">
-    <div class="header-top">
-        <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i></a>
-        <div class="header-info">
-            <h2 id="display-query">Hasil Pencarian</h2>
-            <p id="result-count">Mencari tiket...</p>
-        </div>
-    </div>
+<header class="main-header">
+    <a href="../index.html" style="text-decoration: none;">
+        <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Trans</span></h1>
+    </a>
+    <p class="tagline-yellow">HASIL PENCARIAN TIKET</p>
 </header>
 
-<main class="container">
-    <div id="results-list"></div>
-</main>
-
-<div id="search-loader" class="loader-overlay">
-    <i class="fas fa-spinner fa-spin fa-3x"></i>
+<div class="container" style="margin-top: 20px;">
+    <div id="results-list">
+        </div>
 </div>
+
+<nav class="bottom-nav">
+    <a href="../index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="../index.html" class="nav-item active"><i class="fas fa-search"></i><span>Search</span></a>
+    <a href="index.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Jadwal</span></a>
+    <a href="https://wa.me/6285156677461" class="nav-item"><i class="fas fa-phone-alt"></i><span>Kontak</span></a>
+</nav>
 
 <script src="search.js"></script>
 </body>
