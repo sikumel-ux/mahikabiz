@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAHIKA Dashboard Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+</head>
+<body>
+
+<div id="loader" class="hidden">
+    <i class="fas fa-circle-notch fa-spin fa-3x"></i>
+    <p>Memproses ke GDrive...</p>
+</div>
+
+<header class="admin-header">
+    <div class="header-content">
+        <h2>MAHIKA <span class="accent">ADMIN</span></h2>
+        <p id="tab-title">Dashboard Jadwal</p>
+    </div>
+</header>
+
+<main class="container">
+    <section id="content-jadwal" class="tab-content">
+        <div class="card form-card">
+            <h3><i class="fas fa-plus-circle"></i> Tambah Jadwal Bus</h3>
+            <input type="text" id="j-tujuan" placeholder="Tujuan (Solo - Jakarta)">
+            <input type="text" id="j-po" placeholder="Nama PO">
+            <input type="text" id="j-jam" placeholder="Jam (cth: 19:00)">
+            <input type="number" id="j-harga" placeholder="Harga Tiket">
+            <label class="file-label">Foto Bus:</label>
+            <input type="file" id="fileBus" class="file-input" accept="image/*">
+            <button class="btn-primary" onclick="handleSimpan('jadwal')">SIMPAN JADWAL</button>
+        </div>
+        <div class="card data-card">
+            <h3>Daftar Jadwal Aktif</h3>
+            <div id="list-jadwal" class="list-container"></div>
+        </div>
+    </section>
+
+    <section id="content-news" class="tab-content hidden">
+        <div class="card form-card">
+            <h3><i class="fas fa-edit"></i> Buat Berita Baru</h3>
+            <input type="text" id="n-judul" placeholder="Judul Berita">
+            <textarea id="n-isi" placeholder="Tulis isi berita di sini..." rows="5"></textarea>
+            <label class="file-label">Foto Berita:</label>
+            <input type="file" id="fileNews" class="file-input" accept="image/*">
+            <button class="btn-primary" onclick="handleSimpan('news')">PUBLISH BERITA</button>
+        </div>
+        <div class="card data-card">
+            <h3>Arsip Berita</h3>
+            <div id="list-news" class="list-container"></div>
+        </div>
+    </section>
+
+    <section id="content-promo" class="tab-content hidden">
+        <div class="card form-card">
+            <h3><i class="fas fa-ad"></i> Update Slot Promo</h3>
+            <select id="p-slot">
+                <option value="p1">Slot Promo 1</option>
+                <option value="p2">Slot Promo 2</option>
+                <option value="p3">Slot Promo 3</option>
+            </select>
+            <input type="text" id="p-judul" placeholder="Judul Promo">
+            <textarea id="p-desk" placeholder="Deskripsi Singkat" rows="2"></textarea>
+            <label class="file-label">Foto Promo:</label>
+            <input type="file" id="filePromo" class="file-input" accept="image/*">
+            <button class="btn-primary" onclick="handleSimpan('promo')">UPDATE PROMO</button>
+        </div>
+        <div class="card data-card">
+            <h3>Promo Berjalan</h3>
+            <div id="list-promo" class="list-container"></div>
+        </div>
+    </section>
+
+    <section id="content-partner" class="tab-content hidden">
+        <div class="card form-card">
+            <h3><i class="fas fa-handshake"></i> Partner Marquee</h3>
+            <input type="text" id="ptr-nama" placeholder="Nama PO Partner (Cth: PO HARYANTO)">
+            <button class="btn-primary" onclick="handleSimpan('partner')">TAMBAH PARTNER</button>
+        </div>
+        <div class="card data-card">
+            <h3>List Partner Running Text</h3>
+            <div id="list-partner" class="list-container"></div>
+        </div>
+    </section>
+</main>
+
+<nav class="admin-nav">
+    <div class="nav-item active" onclick="switchTab('jadwal', this)">
+        <i class="fas fa-bus"></i><span>Jadwal</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('news', this)">
+        <i class="fas fa-newspaper"></i><span>News</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('promo', this)">
+        <i class="fas fa-tags"></i><span>Promo</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('partner', this)">
+        <i class="fas fa-star"></i><span>Partner</span>
+    </div>
+</nav>
+
+<script src="admin.js"></script>
+</body>
+  </html>
+  
