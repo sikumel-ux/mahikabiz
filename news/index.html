@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Detail Berita - MAHIKA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="back-btn" onclick="window.location.href='../index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">News</span></h1>
+    </header>
+
+    <main class="container">
+        <div id="news-content">
+            <div class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Menghubungkan ke server...</p>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="../index.html" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-home"></i></div>
+            <span>Home</span>
+        </a>
+        <a href="../jadwal.html" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-calendar-alt"></i></div>
+            <span>Jadwal</span>
+        </a>
+        <a href="../profile.html" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-user-circle"></i></div>
+            <span>Profile</span>
+        </a>
+        <a href="../kontak.html" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-comment-dots"></i></div>
+            <span>Kontak</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
