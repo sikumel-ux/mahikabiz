@@ -48,7 +48,7 @@ body { background: var(--bg); padding-bottom: 110px; overflow-x: hidden; }
 .news-info p { font-size: 0.65rem; color: #888; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 /* MARQUEE */
-.marquee-wrapper { overflow: hidden; display: flex; background: #fff; padding: 10px 0; border-top: 1px solid #eee; margin-top: 25px; }
+.marquee-wrapper { overflow: hidden; display: flex; background: transparent; padding: 10px 0; border-top: 1px solid #eee; margin-top: 25px; }
 .marquee-content { display: flex; gap: 15px; animation: run-fast 20s linear infinite; }
 .po-card-mini { padding: 5px 12px; background: #f8f9fa; border-radius: 6px; border: 1px solid #eee; white-space: nowrap; font-size: 0.7rem; font-weight: 800; color: var(--p-dark); }
 @keyframes run-fast { from { transform: translateX(0); } to { transform: translateX(-50%); } }
