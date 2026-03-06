@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MAHIKA Trans - Official</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="55.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Trans</span></h1>
+        <p class="tagline-yellow">OFFICIAL RESERVATION</p>
+    </header>
+
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Cari rute atau PO bus...">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-services">
+            <div class="service-item" onclick="filterService('bus')">
+                <div class="service-icon bg-blue"><i class="fas fa-bus"></i></div>
+                <span>BUS</span>
+            </div>
+            <div class="service-item" onclick="filterService('travel')">
+                <div class="service-icon bg-orange"><i class="fas fa-shuttle-van"></i></div>
+                <span>TRAVEL</span>
+            </div>
+            <div class="service-item" onclick="filterService('kapal')">
+                <div class="service-icon bg-teal"><i class="fas fa-ship"></i></div>
+                <span>KAPAL</span>
+            </div>
+            <div class="service-item" onclick="filterService('pesawat')">
+                <div class="service-icon bg-red"><i class="fas fa-plane"></i></div>
+                <span>AIR</span>
+            </div>
+        </div>
+
+        <div class="section-label"><i class="fas fa-star"></i> Promo</div>
+        <div class="promo-slider" id="promo-list">
+            <div class="promo-card"></div>
+            <div class="promo-card"></div>
+        </div>
+
+        <div class="section-label"><i class="fas fa-bus"></i> Rute Populer</div>
+        <div class="bus-grid" id="bus-list"></div>
+    </div>
+
+    <div class="marquee-section">
+        <div class="marquee-wrapper">
+            <div class="marquee-content" id="marquee-po">
+                <div class="po-card-mini"><span>PO. HARYANTO</span></div>
+                <div class="po-card-mini"><span>SINAR JAYA</span></div>
+                <div class="po-card-mini"><span>ROSALIA INDAH</span></div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <div class="nav-icon-wrapper"><i class="fas fa-home"></i></div>
+            <span>Home</span>
+        </a>
+        <a href="jadwal.html" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-calendar-alt"></i></div>
+            <span>Jadwal</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-user-circle"></i></div>
+            <span>Profile</span>
+        </a>
+        <a href="kontak.html" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-comment-dots"></i></div>
+            <span>Kontak</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
