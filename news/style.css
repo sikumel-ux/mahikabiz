@@ -14,7 +14,7 @@ body { background: var(--bg); padding-bottom: 100px; }
 .news-header h1 { font-size: 1.5rem; color: var(--p-dark); margin-bottom: 10px; line-height: 1.2; }
 .news-meta { font-size: 0.75rem; color: #888; margin-bottom: 20px; display: block; }
 .featured-image { width: 100%; border-radius: 15px; margin-bottom: 20px; }
-.news-body { line-height: 1.6; color: #444; font-size: 0.95rem; }
+.news-body { line-height: 1.6; color: #444; text-align: justify; font-size: 0.95rem; }
 
 .loading-state { text-align: center; padding: 40px; color: #888; }
 .loading-state i { font-size: 2rem; color: var(--p-dark); margin-bottom: 10px; }
