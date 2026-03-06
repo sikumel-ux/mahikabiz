@@ -1,4 +1,3 @@
-// CONFIG FIREBASE (Gunakan Config Milikmu)
 const firebaseConfig = {
     apiKey: "AIzaSyBZNupFpsHWibTfthCtiGc8mzB2q0QaOqY",
     authDomain: "mahikabiz.firebaseapp.com",
@@ -9,32 +8,10 @@ const firebaseConfig = {
     appId: "1:795712739200:web:5cb7b9627ffccb14f29365"
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// --- 1. LOGIC PARTNER PO ---
-function addPartner() {
-    const nama = document.getElementById('p-nama').value.toUpperCase();
-    if(!nama) return alert("Isi nama PO!");
-    db.ref('partners').push({ nama: nama }).then(() => {
-        document.getElementById('p-nama').value = '';
-    });
-}
-
-function loadPartners() {
-    db.ref('partners').on('value', s => {
-        const d = s.val();
-        const list = document.getElementById('partner-list');
-        list.innerHTML = d ? Object.keys(d).map(id => `
-            <div class="list-item">
-                <span>${d[id].nama}</span>
-                <button class="btn-delete" onclick="deleteItem('partners/${id}')">Hapus</button>
-            </div>
-        `).join('') : "Belum ada partner.";
-    });
-}
-
-// --- 2. LOGIC JADWAL BUS ---
+// --- JADWAL ---
 function saveJadwal() {
     const data = {
         namaPO: document.getElementById('j-po').value,
@@ -43,27 +20,44 @@ function saveJadwal() {
         harga: document.getElementById('j-harga').value,
         foto: document.getElementById('j-foto').value
     };
-    if(!data.namaPO || !data.tujuan) return alert("Lengkapi data jadwal!");
-    db.ref('jadwal').push(data).then(() => {
-        alert("Jadwal Berhasil Disimpan!");
-        clearJadwal();
-    });
+    db.ref('jadwal').push(data).then(() => { alert("Jadwal Ditambah!"); location.reload(); });
 }
 
 function loadJadwal() {
     db.ref('jadwal').on('value', s => {
         const d = s.val();
-        const list = document.getElementById('jadwal-list');
-        list.innerHTML = d ? Object.keys(d).map(id => `
-            <div class="list-item">
-                <span style="font-size:0.8rem">${d[id].namaPO} - ${d[id].tujuan}</span>
-                <button class="btn-delete" onclick="deleteItem('jadwal/${id}')">Hapus</button>
+        const el = document.getElementById('jadwal-list');
+        el.innerHTML = d ? Object.keys(d).map(id => `
+            <tr>
+                <td><b>${d[id].namaPO}</b><br><small>${d[id].tujuan}</small></td>
+                <td>${d[id].jam}</td>
+                <td>Rp ${Number(d[id].harga).toLocaleString()}</td>
+                <td><button class="btn-del" onclick="del('jadwal/${id}')"><i class="fas fa-trash"></i></button></td>
+            </tr>
+        `).join('') : "";
+    });
+}
+
+// --- PARTNER ---
+function addPartner() {
+    const nama = document.getElementById('p-nama').value.toUpperCase();
+    if(nama) db.ref('partners').push({ nama }).then(() => document.getElementById('p-nama').value = '');
+}
+
+function loadPartners() {
+    db.ref('partners').on('value', s => {
+        const d = s.val();
+        const el = document.getElementById('partner-list-admin');
+        el.innerHTML = d ? Object.keys(d).map(id => `
+            <div class="list-item" style="background:#fff; padding:15px; margin-bottom:10px; border-radius:12px; display:flex; justify-content:space-between; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
+                <b>${d[id].nama}</b>
+                <button class="btn-del" onclick="del('partners/${id}')"><i class="fas fa-trash"></i></button>
             </div>
         `).join('') : "";
     });
 }
 
-// --- 3. LOGIC NEWS ---
+// --- NEWS ---
 function saveNews() {
     const data = {
         judul: document.getElementById('n-judul').value,
@@ -71,48 +65,34 @@ function saveNews() {
         isi: document.getElementById('n-isi').value,
         tanggal: new Date().toLocaleDateString('id-ID')
     };
-    if(!data.judul || !data.isi) return alert("Lengkapi berita!");
-    db.ref('news').push(data).then(() => {
-        alert("Berita Berhasil Publish!");
-        clearNews();
-    });
+    db.ref('news').push(data).then(() => alert("News Published!"));
 }
 
-function loadNews() {
-    db.ref('news').on('value', s => {
+// --- PROMO ---
+function savePromo() {
+    const foto = document.getElementById('promo-foto').value;
+    if(foto) db.ref('promo').push({ foto }).then(() => alert("Promo Saved!"));
+}
+
+function loadPromo() {
+    db.ref('promo').on('value', s => {
         const d = s.val();
-        const list = document.getElementById('news-list');
-        list.innerHTML = d ? Object.keys(d).map(id => `
-            <div class="list-item">
-                <span style="font-size:0.8rem">${d[id].judul}</span>
-                <button class="btn-delete" onclick="deleteItem('news/${id}')">Hapus</button>
+        const el = document.getElementById('promo-list-admin');
+        el.innerHTML = d ? Object.keys(d).map(id => `
+            <div style="position:relative;">
+                <img src="${d[id].foto}" style="width:100%; border-radius:15px;">
+                <button onclick="del('promo/${id}')" style="position:absolute; top:10px; right:10px; background:white; color:red; border-radius:50%; width:30px; height:30px; border:none; cursor:pointer;"><i class="fas fa-trash"></i></button>
             </div>
         `).join('') : "";
     });
 }
 
-// --- HELPER FUNCTIONS ---
-function deleteItem(path) {
-    if(confirm("Yakin mau hapus data ini?")) db.ref(path).remove();
-}
+// HELPER
+function del(path) { if(confirm("Hapus data?")) db.ref(path).remove(); }
 
-function clearJadwal() {
-    document.getElementById('j-po').value = '';
-    document.getElementById('j-tujuan').value = '';
-    document.getElementById('j-harga').value = '';
-    document.getElementById('j-foto').value = '';
-}
-
-function clearNews() {
-    document.getElementById('n-judul').value = '';
-    document.getElementById('n-foto').value = '';
-    document.getElementById('n-isi').value = '';
-}
-
-// Jalankan semua load saat halaman dibuka
 document.addEventListener('DOMContentLoaded', () => {
-    loadPartners();
     loadJadwal();
-    loadNews();
+    loadPartners();
+    loadPromo();
 });
-          
+                                              
