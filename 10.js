@@ -12,19 +12,23 @@ if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
 const db = firebase.database();
 
 function init() {
-    // 1. PROMO (Ditambah <span> buat judul)
-    db.ref('promo').on('value', snapshot => {
-        const data = snapshot.val();
-        const container = document.getElementById('promo-list');
-        if (data && container) {
-            const list = Object.values(data);
-            container.innerHTML = list.map(p => `
-                <div class="promo-card" style="background-image: url('${p.foto}')">
-                    <span>${p.judul || ''}</span>
+    // 1. PROMO (Load Judul & Deskripsi dari Firebase)
+db.ref('promo').on('value', snapshot => {
+    const data = snapshot.val();
+    const container = document.getElementById('promo-list');
+    if (data && container) {
+        const list = Object.values(data);
+        container.innerHTML = list.map(p => `
+            <div class="promo-card" style="background-image: url('${p.foto}')">
+                <div class="promo-content">
+                    <h4>${p.judul || ''}</h4>
+                    <p>${p.desk || ''}</p> 
                 </div>
-            `).join('');
-        }
-    });
+            </div>
+        `).join('');
+    }
+});
+
 
     // 2. JADWAL
     db.ref('jadwal').on('value', snapshot => {
