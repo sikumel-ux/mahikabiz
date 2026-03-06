@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin MAHIKA Trans</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <style>
+        :root { --p-dark: #003B73; --accent: #FFC107; --bg: #f0f2f5; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding-bottom: 50px; }
+        header { background: var(--p-dark); color: white; padding: 20px; text-align: center; margin-bottom: 20px; }
+        .container { max-width: 800px; margin: auto; padding: 0 15px; }
+        .admin-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        h2, h3 { color: var(--p-dark); margin-top: 0; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; color: #555; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .btn-save { background: var(--p-dark); color: var(--accent); }
+        .btn-save:hover { background: #002b55; }
+        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; }
+        .btn-delete { color: #ff4d4d; border: none; background: none; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>PANEL ADMIN MAHIKA TRANS</h1>
+</header>
+
+<div class="container">
+    
+    <div class="admin-card">
+        <h3><i class="fas fa-handshake"></i> Partner Marquee PO</h3>
+        <p style="font-size: 0.8rem; color: #777;">Nama PO yang ada di sini akan muncul di baris jalan halaman utama.</p>
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <input type="text" id="p-nama" placeholder="Nama PO (Contoh: PO HARYANTO)">
+            <button onclick="addPartner()" style="width: auto; background: var(--accent); color: var(--p-dark);">TAMBAH</button>
+        </div>
+        <div id="partner-list"></div>
+    </div>
+
+    <div class="admin-card">
+        <h3><i class="fas fa-bus"></i> Tambah Jadwal Bus</h3>
+        <div class="form-group">
+            <label>Nama PO</label>
+            <input type="text" id="j-po" placeholder="Contoh: Sinar Jaya">
+        </div>
+        <div class="form-group">
+            <label>Tujuan / Rute</label>
+            <input type="text" id="j-tujuan" placeholder="Contoh: JOGJA - SOLO - SURABAYA">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <div class="form-group" style="flex:1">
+                <label>Jam Keberangkatan</label>
+                <input type="text" id="j-jam" placeholder="19:00">
+            </div>
+            <div class="form-group" style="flex:1">
+                <label>Harga Tiket (Angka saja)</label>
+                <input type="number" id="j-harga" placeholder="250000">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>URL Foto Bus/Rute</label>
+            <input type="text" id="j-foto" placeholder="https://link-gambar.jpg">
+        </div>
+        <button class="btn-save" onclick="saveJadwal()">SIMPAN JADWAL</button>
+        <hr>
+        <div id="jadwal-list"></div>
+    </div>
+
+    <div class="admin-card">
+        <h3><i class="fas fa-newspaper"></i> Update Berita (News)</h3>
+        <div class="form-group">
+            <label>Judul Berita</label>
+            <input type="text" id="n-judul" placeholder="Isi judul berita">
+        </div>
+        <div class="form-group">
+            <label>URL Foto Berita</label>
+            <input type="text" id="n-foto" placeholder="https://link-foto-berita.jpg">
+        </div>
+        <div class="form-group">
+            <label>Isi Berita</label>
+            <textarea id="n-isi" rows="5" placeholder="Tulis isi berita lengkap di sini..."></textarea>
+        </div>
+        <button class="btn-save" onclick="saveNews()">PUBLISH BERITA</button>
+        <hr>
+        <div id="news-list"></div>
+    </div>
+
+</div>
+
+<script src="admin.js"></script>
+</body>
+          </html>
+  
