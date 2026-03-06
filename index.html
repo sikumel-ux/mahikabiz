@@ -3,75 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHIKA Trans - Official Partner</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>MAHIKA Trans - Travel & Bus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --p-dark: #003B73; --accent: #FFC107; --bg: #F8FAFC; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
+        header { background: var(--p-dark); color: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; }
+        .container { padding: 15px; max-width: 500px; margin: auto; }
+        
+        /* Promo Slider */
+        .promo-container { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scroll-snap-type: x mandatory; }
+        .promo-card { min-width: 85%; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); scroll-snap-align: center; }
+        .promo-card img { width: 100%; height: 150px; object-fit: cover; }
+        .promo-content { padding: 12px; }
+        .promo-content h4 { margin: 0; color: var(--p-dark); }
+        .promo-content p { font-size: 0.75rem; color: #666; margin: 5px 0 0; }
+
+        /* Bus List */
+        .section-title { font-weight: 800; margin: 20px 0 10px; display: flex; align-items: center; gap: 10px; }
+        .bus-card { background: white; border-radius: 15px; padding: 15px; margin-bottom: 15px; display: flex; gap: 15px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .bus-card img { width: 80px; height: 60px; border-radius: 10px; object-fit: cover; }
+        .bus-info { flex: 1; }
+        .bus-info h4 { margin: 0; font-size: 0.9rem; }
+        .bus-info p { margin: 2px 0; font-size: 0.75rem; color: #888; }
+        .price { color: #E53E3E; font-weight: 800; font-size: 0.9rem; }
+
+        /* News */
+        .news-card { background: white; border-radius: 15px; margin-bottom: 15px; overflow: hidden; }
+        .news-card img { width: 100%; height: 180px; object-fit: cover; }
+        .news-body { padding: 15px; }
+
+        /* Nav */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 70px; background: white; display: flex; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); }
+        .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #A0AEC0; font-size: 0.7rem; font-weight: 700; gap: 4px; }
+        .nav-item.active { color: var(--p-dark); }
+        .nav-item i { font-size: 1.2rem; }
+    </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-content-center">
-            <div class="branding-center">
-                <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Trans</span></h1>
-                <p class="tagline-yellow">Official Reservation Partner</p>
-            </div>
-            <div class="info-bar-center">
-                <span id="header-date">--</span>
-                <span class="dot">•</span>
-                <span id="header-time">00:00</span>
-                <span id="header-weather" style="margin-left:10px;"></span>
-            </div>
-        </div>
-        <div class="search-box">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" id="search-input" placeholder="Cari rute, PO, atau berita...">
-        </div>
-    </header>
+<header>
+    <h2 style="margin:0; letter-spacing:1px;">MAHIKA <span style="color:var(--accent)">TRANS</span></h2>
+    <p style="font-size:0.7rem; opacity:0.8;">Solusi Perjalanan Nyaman Anda</p>
+</header>
 
-    <main class="app-body">
-        <div id="home-view">
-            <div class="section-label">Promo & Info Terbaru</div>
-            <section class="scroll-container" id="promo-container">
-                </section>
+<div class="container">
+    <div class="promo-container" id="promo-list"></div>
 
-            <section class="services-grid">
-                <div class="svc-item"><div class="svc-icon s1"><i class="fas fa-bus"></i></div><span>Tiket</span></div>
-                <div class="svc-item"><div class="svc-icon s2"><i class="fas fa-shuttle-van"></i></div><span>Travel</span></div>
-                <div class="svc-item"><div class="svc-icon s3"><i class="fas fa-car"></i></div><span>Rental</span></div>
-                <div class="svc-item"><div class="svc-icon s4"><i class="fas fa-box"></i></div><span>Paket</span></div>
-            </section>
-        </div>
+    <div class="section-title"><i class="fas fa-bus" style="color:var(--p-dark)"></i> JADWAL TERSEDIA</div>
+    <div id="bus-list"></div>
 
-        <section class="catalog-section">
-            <h3 id="section-title" class="section-label">Rute Populer</h3>
-            <div id="bus-grid" class="product-grid-3col"></div>
-        </section>
+    <div class="section-title"><i class="fas fa-newspaper" style="color:var(--p-dark)"></i> MAHIKA NEWS</div>
+    <div id="news-list"></div>
+</div>
 
-        <section class="news-section">
-            <h3 class="section-label">Mahika News</h3>
-            <div id="news-list" class="news-container"></div>
-        </section>
+<nav class="bottom-nav">
+    <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Beranda</span></a>
+    <a href="javascript:void(0)" onclick="window.scrollTo({top: 400, behavior:'smooth'})" class="nav-item"><i class="fas fa-ticket-alt"></i><span>Tiket</span></a>
+    <a href="javascript:void(0)" onclick="window.scrollTo({top: 1000, behavior:'smooth'})" class="nav-item"><i class="fas fa-newspaper"></i><span>Berita</span></a>
+    <a href="admin.html" class="nav-item"><i class="fas fa-user-circle"></i><span>Admin</span></a>
+</nav>
 
-        <div class="section-label">Partner Bus Kami</div>
-        <div class="po-ticker-wrapper">
-            <div class="ticker-scroll" id="ticker-content">
+<script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbx9JsUb0saYvFnH8vpCn2JZu_AzdrXXXmQIcGfMW0dsTvPndFQC_CtKyLhMx_6Kjd_IEg/exec";
+
+    async function fetchData() {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        
+        // Render Promo
+        document.getElementById('promo-list').innerHTML = data.promo.map(p => `
+            <div class="promo-card">
+                <img src="${p.Foto}">
+                <div class="promo-content">
+                    <h4>${p.Judul}</h4>
+                    <p>${p.Deskripsi}</p>
                 </div>
-        </div>
-    </main>
+            </div>
+        `).join('');
 
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="admin.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Admin</span></a>
-    </nav>
+        // Render Bus
+        document.getElementById('bus-list').innerHTML = data.jadwal.map(b => `
+            <div class="bus-card">
+                <img src="${b.Foto}">
+                <div class="bus-info">
+                    <h4>${b.Tujuan}</h4>
+                    <p><i class="fas fa-id-card"></i> ${b["Nama PO"]}</p>
+                    <p><i class="far fa-clock"></i> Keberangkatan: ${b.Jam}</p>
+                    <div class="price">Rp ${Number(b.Harga).toLocaleString('id-ID')}</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color:#ccc"></i>
+            </div>
+        `).join('');
 
-    <div id="modal-news" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeNews()">&times;</button>
-            <div id="news-detail-body"></div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+        // Render News
+        document.getElementById('news-list').innerHTML = data.news.map(n => `
+            <div class="news-card">
+                <img src="${n.Foto}">
+                <div class="news-body">
+                    <h4 style="margin:0">${n.Judul}</h4>
+                    <p style="font-size:0.8rem; color:#666; text-align:justify">${n.Isi.substring(0, 150)}...</p>
+                </div>
+            </div>
+        `).join('');
+    }
+    fetchData();
+</script>
 </body>
 </html>
