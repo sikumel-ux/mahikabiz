@@ -18,48 +18,52 @@ function handleSearch(e) {
     }
 }
 
-function loadDashboard() {
-    // 1. Promo
+function init() {
+    // Promo
     db.ref('promo').on('value', s => {
-        const d = s.val();
-        if(d) document.getElementById('promo-list').innerHTML = Object.values(d).map(p => `
-            <div class="promo-card" style="background-image:url('${p.foto}')"></div>`).join('');
+        const d = s.val() ? Object.values(s.val()) : [];
+        document.getElementById('promo-list').innerHTML = d.map(p => `<div class="promo-card" style="background-image:url('${p.foto}')"></div>`).join('');
     });
 
-    // 2. News
+    // News (Thumbnail Style)
     db.ref('news').on('value', s => {
         const d = s.val();
         if(!d) return;
         const keys = Object.keys(d).reverse();
         document.getElementById('news-list').innerHTML = keys.map(id => `
             <div class="news-item" onclick="window.location.href='news/?id=${id}'">
-                <img src="${d[id].foto}" class="news-img">
-                <div class="news-info"><h4>${d[id].judul}</h4><p>${d[id].isi.substring(0,50)}...</p></div>
+                <img src="${d[id].foto}" class="news-img" onerror="this.src='https://via.placeholder.com/100'">
+                <div class="news-info">
+                    <h4>${d[id].judul}</h4>
+                    <p>${d[id].isi}</p>
+                </div>
             </div>`).join('');
     });
 
-    // 3. Jadwal & Marquee PO
+    // Jadwal & Marquee
     db.ref('jadwal').on('value', s => {
         const d = s.val() ? Object.values(s.val()) : [];
         
-        // Render Marquee PO (Nama Saja, Font Gede, Looping 10+)
+        // Marquee Bold
         let pos = [...new Set(d.map(x => x.namaPO))];
-        while (pos.length < 10 && pos.length > 0) pos.push(...pos);
-        document.getElementById('marquee-po').innerHTML = pos.map(p => `
-            <div class="po-card-mini"><span>${p}</span></div>`).join('');
+        if(pos.length > 0) {
+            while (pos.length < 10) pos.push(...pos);
+            document.getElementById('marquee-po').innerHTML = pos.map(p => `
+                <div class="po-card-mini"><span>${p}</span></div>`).join('');
+        }
 
-        // Render Rute Populer
+        // Rute
         document.getElementById('bus-list').innerHTML = d.map(b => `
             <div class="bus-card">
-                <img src="${b.foto}" onerror="this.src='https://via.placeholder.com/150'">
+                <img src="${b.foto}">
                 <div class="bus-card-body">
                     <h4>${b.tujuan}</h4>
-                    <p style="font-size:0.65rem">${b.namaPO} | ${b.jam}</p>
+                    <p style="font-size:0.6rem">${b.namaPO} | ${b.jam}</p>
                     <div class="bus-price">Rp ${Number(b.harga).toLocaleString('id-ID')}</div>
                     <a href="https://wa.me/6285156677461?text=Halo Mahika, pesan tiket ${b.namaPO} rute ${b.tujuan}" class="btn-wa">BOOKING</a>
                 </div>
             </div>`).join('');
     });
 }
-
-document.addEventListener('DOMContentLoaded', loadDashboard);
+document.addEventListener('DOMContentLoaded', init);
+                
