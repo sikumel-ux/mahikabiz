@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHIKA Trans - Official Reservation</title>
+    <title>MAHIKA Trans - Official</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -13,40 +13,29 @@
 <body>
 
 <header class="main-header">
-    <a href="index.html" style="text-decoration:none">
-        <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Trans</span></h1>
-    </a>
-    <p class="tagline-yellow">OFFICIAL RESERVATION PARTNER</p>
+    <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Trans</span></h1>
+    <p class="tagline-yellow">OFFICIAL RESERVATION</p>
 </header>
 
 <div class="search-container">
     <div class="search-box">
         <i class="fas fa-search"></i>
-        <input type="text" id="search-input" placeholder="Cari rute atau PO bus..." onkeypress="handleSearch(event)">
+        <input type="text" id="search-input" placeholder="Cari rute atau PO bus...">
     </div>
 </div>
 
-<div class="service-menu">
-    <div class="service-item"><i class="fas fa-bus"></i><span>Bus</span></div>
-    <div class="service-item"><i class="fas fa-ship"></i><span>Kapal</span></div>
-    <div class="service-item"><i class="fas fa-plane"></i><span>Pesawat</span></div>
-    <div class="service-item"><i class="fas fa-box"></i><span>Paket</span></div>
-</div>
+<div class="container">
+    <div class="section-label"><i class="fas fa-star"></i> Promo</div>
+    <div class="promo-slider" id="promo-list"></div>
 
-<main class="container">
-    <div class="section-label"><i class="fas fa-star"></i> Informasi</div>
-    <div class="promo-slider" id="promo-list">
-        </div>
-
-    <div class="section-label"><i class="fas fa-route"></i> Shortcut</div>
+    <div class="section-label"><i class="fas fa-bus"></i> Rute Populer</div>
     <div class="bus-grid" id="bus-list"></div>
 
-    <div class="section-label"><i class="fas fa-newspaper"></i> Berita</div>
+    <div class="section-label"><i class="fas fa-newspaper"></i> News Update</div>
     <div id="news-list"></div>
-</main>
+</div>
 
 <div class="marquee-section">
-    <div class="section-label" style="padding-left:20px"><i class="fas fa-id-badge"></i> Partner</div>
     <div class="marquee-wrapper">
         <div class="marquee-content" id="marquee-po"></div>
     </div>
@@ -54,12 +43,10 @@
 
 <nav class="bottom-nav">
     <a href="index.html" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="javascript:void(0)" onclick="document.getElementById('search-input').focus()" class="nav-item"><i class="fas fa-search"></i><span>Search</span></a>
-    <a href="search/" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Jadwal</span></a>
-    <a href="https://wa.me/6281211407667" class="nav-item"><i class="fas fa-phone-alt"></i><span>Kontak</span></a>
+    <a href="search/" class="nav-item"><i class="fas fa-search"></i><span>Cari</span></a>
+    <a href="admin.html" class="nav-item"><i class="fas fa-user-lock"></i><span>Admin</span></a>
 </nav>
 
 <script src="script.js"></script>
 </body>
-                                                                                                                  </html>
-                                                                                                                  
+</html>
