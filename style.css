@@ -17,6 +17,52 @@ body { background: var(--bg); padding-bottom: 100px; overflow-x: hidden; }
 .service-item { text-align: center; font-size: 0.75rem; font-weight: 700; color: var(--p-dark); }
 .service-item i { display: block; font-size: 1.6rem; color: var(--accent); margin-bottom: 6px; }
 
+/* MENU LAYANAN STYLE */
+.main-services {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.service-item:active { transform: scale(0.9); }
+
+.service-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 18px; /* Agak rounded kotak biar modern */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.service-item span {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--p-dark);
+}
+
+/* WARNA ICON */
+.bg-blue { background: linear-gradient(135deg, #003B73, #0056a8); }
+.bg-orange { background: linear-gradient(135deg, #FF8C00, #FFA500); }
+.bg-teal { background: linear-gradient(135deg, #008080, #20B2AA); }
+.bg-red { background: linear-gradient(135deg, #DC143C, #FF4500); }
+
+
 /* PROMO (FIXED) */
 .promo-slider { display: flex; overflow-x: auto; gap: 15px; padding: 5px 0 15px; scrollbar-width: none; min-height: 150px; }
 .promo-slider::-webkit-scrollbar { display: none; }
