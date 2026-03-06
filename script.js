@@ -10,29 +10,41 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
-
 let localJadwal = [];
 
 function initApp() {
-    // Ambil Jadwal Realtime
-    database.ref('jadwal').on('value', (snapshot) => {
-        const data = snapshot.val();
-        localJadwal = data ? Object.values(data) : [];
+    // 1. Ambil Promo
+    database.ref('promo').on('value', (s) => {
+        const data = s.val() ? Object.values(s.val()) : [];
+        renderPromo(data);
+    });
+
+    // 2. Ambil Jadwal
+    database.ref('jadwal').on('value', (s) => {
+        localJadwal = s.val() ? Object.values(s.val()) : [];
         renderJadwal(localJadwal);
     });
 
-    // Ambil News Realtime
-    database.ref('news').on('value', (snapshot) => {
-        const data = snapshot.val();
-        const newsArray = data ? Object.values(data) : [];
-        renderNews(newsArray);
+    // 3. Ambil News
+    database.ref('news').on('value', (s) => {
+        const data = s.val() ? Object.values(s.val()) : [];
+        renderNews(data.reverse()); // News terbaru di atas
     });
 }
 
+function renderPromo(data) {
+    const el = document.getElementById('promo-list');
+    if (el) el.innerHTML = data.map(p => `
+        <div class="promo-card" style="background-image: url('${p.foto}')">
+            <h4>${p.judul}</h4>
+            <p>${p.desk || ''}</p>
+        </div>
+    `).join('');
+}
+
 function renderJadwal(data) {
-    const container = document.getElementById('bus-list');
-    if (!container) return;
-    container.innerHTML = data.map(b => `
+    const el = document.getElementById('bus-list');
+    if (el) el.innerHTML = data.map(b => `
         <div class="bus-card">
             <img src="${b.foto}" onerror="this.src='https://via.placeholder.com/150'">
             <div class="bus-card-body">
@@ -45,28 +57,30 @@ function renderJadwal(data) {
 }
 
 function renderNews(data) {
-    const container = document.getElementById('news-list');
-    if (!container) return;
-    container.innerHTML = data.reverse().map(n => `
+    const el = document.getElementById('news-list');
+    if (el) el.innerHTML = data.map(n => `
         <div class="news-item">
             <img src="${n.foto}" class="news-img" onerror="this.src='https://via.placeholder.com/100'">
             <div class="news-info">
                 <h4>${n.judul}</h4>
                 <p>${n.isi.substring(0, 80)}...</p>
-                <small style="color:#999; font-size:0.6rem;">${n.tanggal}</small>
+                <small style="color:#999;">${n.tanggal}</small>
             </div>
         </div>
     `).join('');
 }
 
-// Fitur Search Realtime
-document.getElementById('search-input').addEventListener('input', (e) => {
-    const key = e.target.value.toLowerCase();
-    const filtered = localJadwal.filter(b => 
-        b.tujuan.toLowerCase().includes(key) || 
-        b.namaPO.toLowerCase().includes(key)
-    );
-    renderJadwal(filtered);
-});
+// Fitur Search
+const searchInput = document.getElementById('search-input');
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const key = e.target.value.toLowerCase();
+        const filtered = localJadwal.filter(b => 
+            b.tujuan.toLowerCase().includes(key) || 
+            b.namaPO.toLowerCase().includes(key)
+        );
+        renderJadwal(filtered);
+    });
+}
 
 document.addEventListener('DOMContentLoaded', initApp);
