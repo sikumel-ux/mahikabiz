@@ -3,65 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHIKA Trans - Bus Schedule</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>MAHIKA Trans - Partner Tiket Bus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="light-mode">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --p-dark: #003B73; --accent: #FFC107; --bg: #F5F7FA; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
+        
+        /* Header & Logo */
+        .main-header { background: var(--p-dark); padding: 50px 20px 80px; text-align: center; position: relative; border-radius: 0 0 30px 30px; }
+        .logo-text { font-size: 2.2rem; font-weight: 800; margin: 0; }
+        .m-yellow { color: var(--accent); } .m-white { color: #fff; }
+        .tagline-yellow { color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; margin-top: 5px; opacity: 0.9; }
+        
+        /* Search Box */
+        .search-box { position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); width: 85%; background: white; height: 50px; border-radius: 25px; display: flex; align-items: center; padding: 0 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); z-index: 10; }
+        .search-box input { border: none; outline: none; margin-left: 10px; width: 100%; font-size: 0.9rem; }
+        .search-icon { color: var(--p-dark); }
 
-    <header class="main-header">
-        <div class="header-content">
-            <div class="header-info">
-                <div id="header-date" class="info-text">Memuat tanggal...</div>
-                <div class="info-row">
-                    <span id="header-time" class="info-time">00:00:00</span>
-                    <span id="header-weather" class="info-weather"><i class="fas fa-sun"></i> --°C</span>
+        .container { padding: 40px 15px 10px; }
+        .section-label { font-weight: 800; color: var(--p-dark); margin: 20px 0 10px; font-size: 1rem; }
+
+        /* Promo Slider */
+        .promo-slider { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .promo-card { min-width: 280px; height: 160px; border-radius: 20px; background-size: cover; background-position: center; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; color: white; scroll-snap-align: start; position: relative; overflow: hidden; }
+        .promo-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 1; }
+        .promo-card h4, .promo-card p { position: relative; z-index: 2; margin: 0; }
+        .promo-card p { font-size: 0.75rem; text-align: justify; opacity: 0.9; }
+
+        /* Bus Grid 3 Col */
+        .bus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .bus-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .bus-card img { width: 100%; height: 70px; object-fit: cover; }
+        .bus-card-body { padding: 8px; }
+        .bus-card h4 { font-size: 0.7rem; margin: 0; color: var(--p-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .bus-card p { font-size: 0.6rem; margin: 2px 0; color: #777; }
+        .bus-price { font-size: 0.75rem; font-weight: 800; color: #E53E3E; }
+
+        /* News */
+        .news-item { background: white; border-radius: 15px; display: flex; margin-bottom: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .news-img { width: 100px; height: 100px; object-fit: cover; }
+        .news-info { padding: 12px; flex: 1; }
+        .news-info h4 { font-size: 0.85rem; margin: 0; color: var(--p-dark); }
+        .news-info p { font-size: 0.75rem; color: #555; text-align: justify; line-height: 1.4; margin-top: 5px; }
+
+        /* Nav */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 75px; background: white; display: flex; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 100; }
+        .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #A0AEC0; font-size: 0.65rem; font-weight: 700; gap: 4px; }
+        .nav-item.active { color: var(--p-dark); }
+        .nav-item i { font-size: 1.3rem; }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Trans</span></h1>
+    <p class="tagline-yellow">OFFICIAL RESERVATION PARTNER</p>
+    <div class="search-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="search-input" placeholder="Cari rute atau PO bus...">
+    </div>
+</header>
+
+<div class="container">
+    <div class="section-label">Promo Terkini</div>
+    <div class="promo-slider" id="promo-list"></div>
+
+    <div class="section-label">Rute Populer</div>
+    <div class="bus-grid" id="bus-list"></div>
+
+    <div class="section-label">Mahika News</div>
+    <div id="news-list"></div>
+</div>
+
+<nav class="bottom-nav">
+    <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="javascript:void(0)" class="nav-item"><i class="fas fa-ticket-alt"></i><span>Tiket</span></a>
+    <a href="javascript:void(0)" class="nav-item"><i class="fas fa-newspaper"></i><span>News</span></a>
+    <a href="admin.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Admin</span></a>
+</nav>
+
+<script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbwXFK-T4SaQK12gyx0WkaOgfLIxSqjaPYQC3Pz2F78A3DkUEwZ_Oh816FDF1_p__jISww/exec";
+    let db = { jadwal: [], news: [], promo: [] };
+
+    async function load() {
+        const res = await fetch(API_URL);
+        db = await res.json();
+        render(db.jadwal);
+        renderPromo(db.promo);
+        renderNews(db.news);
+    }
+
+    function renderPromo(data) {
+        document.getElementById('promo-list').innerHTML = data.map(p => `
+            <div class="promo-card" style="background-image: url('${p.Foto}')">
+                <h4>${p.Judul}</h4>
+                <p>${p.Deskripsi || ''}</p>
+            </div>
+        `).join('');
+    }
+
+    function render(data) {
+        document.getElementById('bus-list').innerHTML = data.map(b => `
+            <div class="bus-card">
+                <img src="${b.Foto || 'https://via.placeholder.com/150'}">
+                <div class="bus-card-body">
+                    <h4>${b.Tujuan}</h4>
+                    <p>${b["Nama PO"]}</p>
+                    <div class="bus-price">Rp ${Number(b.Harga).toLocaleString('id-ID')}</div>
                 </div>
             </div>
-            <button id="theme-toggle" class="header-btn"><i class="fas fa-moon"></i></button>
-        </div>
-        
-        <div class="curve-container">
-            <svg class="curve" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#003B73" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160V0H1360C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0H0Z"></path>
-            </svg>
-        </div>
+        `).join('');
+    }
 
-        <div class="search-box">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" id="search-input" placeholder="Mau pergi ke mana? (Cari rute...)">
-        </div>
-    </header>
-
-    <main class="app-body">
-        <div id="welcome-msg" class="welcome-section">
-            <div class="welcome-icon">
-                <i class="fas fa-bus-alt"></i>
+    function renderNews(data) {
+        document.getElementById('news-list').innerHTML = data.map(n => `
+            <div class="news-item">
+                <img src="${n.Foto}" class="news-img">
+                <div class="news-info">
+                    <h4>${n.Judul}</h4>
+                    <p>${n.Isi.substring(0, 80)}...</p>
+                </div>
             </div>
-            <h2>Cari Jadwal Bus</h2>
-            <p>Masukkan kota tujuan di atas untuk melihat jadwal keberangkatan.</p>
-        </div>
+        `).join('');
+    }
 
-        <section class="catalog-section">
-            <div id="bus-grid" class="product-grid"></div>
-        </section>
-    </main>
+    document.getElementById('search-input').oninput = (e) => {
+        const val = e.target.value.toLowerCase();
+        const filt = db.jadwal.filter(b => b.Tujuan.toLowerCase().includes(val) || b["Nama PO"].toLowerCase().includes(val));
+        render(filt);
+    };
 
-    <div id="modal-profile" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <div id="profile-detail"></div>
-        </div>
-    </div>
-
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><i class="fas fa-search"></i><span>Cari</span></a>
-        <a href="#" class="nav-item"><i class="fas fa-route"></i><span>Rute</span></a>
-        <a href="#" class="nav-item"><i class="fas fa-history"></i><span>Riwayat</span></a>
-        <a href="#" class="nav-item"><i class="fas fa-cog"></i><span>Setelan</span></a>
-    </nav>
-
-    <script src="script.js"></script>
+    load();
+</script>
 </body>
 </html>
