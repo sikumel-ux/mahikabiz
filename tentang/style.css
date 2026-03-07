@@ -1,129 +1,51 @@
-/* ==========================================
-   FONT & ROOT VARIABLES
-   ========================================== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
 :root { 
     --p-dark: #003B73; 
     --accent: #FFC107; 
     --bg: #F5F7FA; 
     --white: #ffffff;
-    --text-muted: #666;
 }
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Poppins', sans-serif; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background: var(--bg); padding-bottom: 120px; overflow-x: hidden; }
 
-body { 
-    background: var(--bg); 
-    padding-bottom: 120px; 
-    overflow-x: hidden; 
-}
-
-/* ==========================================
-   HEADER (MELENGKUNG)
-   ========================================== */
+/* HEADER & SEARCH */
 .main-header { 
     background: var(--p-dark); 
-    padding: 45px 20px 20px; 
+    padding: 45px 20px 25px; 
     text-align: center; 
+    position: relative; 
+    z-index: 1;
 }
+.logo-text { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+.m-yellow { color: var(--accent); } .m-white { color: #fff; }
+.tagline-yellow { color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-top: 8px; display: block; }
 
-.logo-text { 
-    font-size: 2.2rem; 
-    font-weight: 900; 
-    line-height: 1; 
-}
-
-.m-yellow { color: var(--accent); } 
-.m-white { color: var(--white); }
-
-.tagline-yellow { 
-    color: var(--accent); 
-    font-size: 0.6rem; 
-    letter-spacing: 2px; 
-    text-transform: uppercase; 
-    font-weight: 700; 
-    margin-top: 8px; 
-    display: block; 
-}
-
-/* ==========================================
-   SEARCH CONTAINER
-   ========================================== */
 .search-container { 
     background: var(--p-dark); 
-    padding: 0 20px 50px; 
+    padding: 0 20px 60px; 
     border-radius: 0 0 35px 35px; 
+    position: relative;
+    z-index: 1;
 }
-
 .search-box { 
-    background: var(--white); 
-    height: 50px; 
-    border-radius: 25px; 
-    display: flex; 
-    align-items: center; 
-    padding: 0 20px; 
+    background: white; height: 50px; border-radius: 25px; 
+    display: flex; align-items: center; padding: 0 20px; 
     box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
 }
+.search-box input { border: none; outline: none; width: 100%; margin-left: 10px; font-size: 0.9rem; }
 
-.search-box input { 
-    border: none; 
-    outline: none; 
-    width: 100%; 
-    margin-left: 10px; 
-    font-size: 0.9rem; 
-    font-weight: 500; 
-}
-
-/* ==========================================
-   MAIN SERVICES (ICON ATAS)
-   ========================================== */
-.container { padding: 0 15px; }
-
+/* SERVICES MENU */
+.container { padding: 0 15px; position: relative; }
 .main-services { 
-    display: flex; 
-    justify-content: space-around; 
-    padding: 15px 5px; 
-    margin: -25px 0 20px; 
-    background: var(--white); 
-    border-radius: 20px; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
-    position: relative; 
-    z-index: 10; 
+    display: flex; justify-content: space-around; 
+    padding: 15px 5px; margin: -35px auto 20px; 
+    background: white; border-radius: 20px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+    position: relative; z-index: 10;
 }
-
-.service-item { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    flex: 1; 
-    text-align: center; 
-    text-decoration: none; 
-}
-
-.service-icon { 
-    width: 44px; 
-    height: 44px; 
-    border-radius: 12px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    color: var(--white); 
-    font-size: 1.1rem; 
-    margin-bottom: 6px; 
-}
-
-.service-item span { 
-    font-size: 0.58rem; 
-    font-weight: 800; 
-    color: var(--p-dark); 
-    text-transform: uppercase; 
-}
+.service-item { display: flex; flex-direction: column; align-items: center; flex: 1; text-decoration: none; }
+.service-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; margin-bottom: 6px; }
+.service-item span { font-size: 0.6rem; font-weight: 800; color: var(--p-dark); text-transform: uppercase; }
 
 /* SERVICE COLORS */
 .bg-blue { background: linear-gradient(135deg, #003B73, #0056a8); }
@@ -131,203 +53,72 @@ body {
 .bg-teal { background: linear-gradient(135deg, #008080, #20B2AA); }
 .bg-red { background: linear-gradient(135deg, #DC143C, #FF4500); }
 
-/* ==========================================
-   BUS GRID (RUTE POPULER) - OPTIMIZED
-   ========================================== */
-.section-label { 
-    font-weight: 800; 
-    color: var(--p-dark); 
-    margin: 25px 0 15px; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-    font-size: 0.85rem; 
-    text-transform: uppercase;
-}
+.section-label { font-weight: 800; color: var(--p-dark); margin: 25px 0 15px; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
 
-.bus-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 12px; 
-}
-
-.bus-card { 
-    background: var(--white); 
-    border-radius: 18px; 
-    overflow: hidden; 
-    border-bottom: 3px solid var(--accent); 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
-    display: flex; 
-    flex-direction: column; 
-}
-
-.bus-card img { 
-    width: 100%; 
-    height: 95px; 
-    object-fit: cover; 
-}
-
-.bus-card-body { 
-    padding: 10px; 
-    flex-grow: 1; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
-}
-
-.bus-card-body h4 { 
-    font-size: 0.85rem; /* Ukuran Kota */
-    font-weight: 800; 
-    color: var(--p-dark); 
-    line-height: 1.2; 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Meta PO & Jam (UKURAN NYAMAN 0.75rem) */
-.bus-meta { 
-    font-size: 0.75rem; 
-    font-weight: 500; 
-    color: var(--text-muted); 
-    margin-top: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bus-price { 
-    font-size: 0.8rem; 
-    font-weight: 900; 
-    color: #d32f2f; 
-    margin: 6px 0; 
-}
-
-.btn-wa { 
-    display: block; 
-    background: var(--p-dark); 
-    color: var(--accent); 
-    text-align: center; 
-    padding: 7px 0; 
-    border-radius: 10px; 
-    text-decoration: none; 
-    font-size: 0.65rem; 
-    font-weight: 800; 
-    border: 1px solid var(--accent); 
-}
-
-/* ==========================================
-   PROMO SLIDER
-   ========================================== */
-.promo-slider { 
-    display: flex; 
-    overflow-x: auto; 
-    gap: 15px; 
-    padding-bottom: 10px; 
-    scrollbar-width: none; 
-}
-.promo-slider::-webkit-scrollbar { display: none; }
-
+/* PROMO CARD */
+.promo-slider { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; scrollbar-width: none; }
 .promo-card { 
-    min-width: 280px; 
-    height: 140px; 
-    border-radius: 20px; 
-    background-size: cover; 
-    background-position: center; 
-    flex-shrink: 0; 
-    position: relative; 
-    overflow: hidden; 
-    display: flex; 
-    align-items: flex-end; 
-    padding: 15px; 
+    min-width: 280px; height: 140px; border-radius: 20px; background-size: cover; background-position: center; 
+    flex-shrink: 0; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 15px;
 }
-
-.promo-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
-}
-
+.promo-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
 .promo-content { position: relative; z-index: 2; }
-.promo-content h4 { color: var(--accent); font-size: 0.95rem; font-weight: 800; }
-.promo-content p { color: var(--white); font-size: 0.7rem; line-height: 1.2; }
+.promo-content h4 { color: var(--accent); font-size: 0.9rem; font-weight: 800; }
+.promo-content p { color: white; font-size: 0.7rem; line-height: 1.2; }
 
-/* ==========================================
-   PROFILE PAGE STYLES
-   ========================================== */
-.profile-card {
-    background: var(--white);
-    padding: 30px 20px;
-    border-radius: 25px;
-    text-align: center;
-    margin-top: -30px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    position: relative;
-    z-index: 10;
+/* BUS GRID (RUTE POPULER) */
+.bus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.bus-card { background: white; border-radius: 18px; overflow: hidden; border-bottom: 3px solid var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
+.bus-card img { width: 100%; height: 95px; object-fit: cover; }
+.bus-card-body { padding: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.bus-card-body h4 { font-size: 0.8rem; font-weight: 800; color: var(--p-dark); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.bus-meta { font-size: 0.7rem; font-weight: 500; color: #666; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bus-price { font-size: 0.85rem; font-weight: 900; color: #d32f2f; margin: 6px 0; }
+.btn-wa { display: block; background: var(--p-dark); color: var(--accent); text-align: center; padding: 7px 0; border-radius: 10px; text-decoration: none; font-size: 0.65rem; font-weight: 800; border: 1px solid var(--accent); }
+
+/* TESTIMONI GOOGLE STYLE */
+.testi-container { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); min-height: 140px; display: flex; align-items: center; justify-content: center; }
+.testi-item { text-align: center; width: 100%; }
+.testi-user { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+.testi-user img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); }
+.testi-name { font-size: 0.75rem; font-weight: 700; color: var(--p-dark); text-align: left; }
+.testi-stars { color: var(--accent); font-size: 0.6rem; display: block; }
+.testi-text { font-size: 0.7rem; color: #555; font-style: italic; }
+
+/* GALLERY FADE */
+.gallery-container { width: 100%; height: 180px; background: #eee; border-radius: 20px; overflow: hidden; position: relative; }
+.gallery-container img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+
+/* FADE ANIMATION */
+.fade-anim { animation: fadeInOut 5s infinite; }
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: scale(1.02); }
+    10%, 90% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; }
 }
 
-.brand-logo-container {
-    width: 70px; height: 70px;
-    background: var(--p-dark);
-    color: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2rem; border-radius: 50%;
-    margin: 0 auto 15px;
-    border: 4px solid var(--bg);
-}
+/* NEWS ITEM */
+.news-item { background: white; border-radius: 15px; display: flex; align-items: center; margin-bottom: 12px; height: 85px; border: 1px solid #eee; overflow: hidden; }
+.news-img { width: 85px; height: 85px; object-fit: cover; }
+.news-info { padding: 10px; }
+.news-info h4 { font-size: 0.75rem; font-weight: 700; color: var(--p-dark); margin-bottom: 2px; }
+.news-info p { font-size: 0.65rem; color: #888; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-.about-text {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    line-height: 1.6;
-    color: #444;
-    border-left: 5px solid var(--p-dark);
-}
+/* MARQUEE */
+.marquee-wrapper { overflow: hidden; padding: 20px 0; }
+.marquee-content { display: flex; gap: 15px; animation: run 25s linear infinite; }
+.po-card-mini { padding: 6px 15px; background: white; border-radius: 10px; border: 1px solid #eee; font-size: 0.65rem; font-weight: 700; white-space: nowrap; }
+@keyframes run { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-.features-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 12px; margin-top: 15px;
-}
-
-.feature-box {
-    background: var(--white);
-    padding: 15px;
-    border-radius: 18px;
-    text-align: center;
-    border: 1px solid #eee;
-}
-
-/* ==========================================
-   BOTTOM NAVIGATION (iPHONE STYLE)
-   ========================================== */
+/* BOTTOM NAV */
 .bottom-nav { 
-    position: fixed; 
-    bottom: 20px; left: 20px; right: 20px; 
-    height: 70px; 
-    background: rgba(255, 255, 255, 0.9); 
-    backdrop-filter: blur(15px); 
-    display: flex; 
-    justify-content: space-around; 
-    align-items: center; 
-    border-radius: 30px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
-    z-index: 1000; 
+    position: fixed; bottom: 20px; left: 20px; right: 20px; height: 65px; 
+    background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); 
+    display: flex; justify-content: space-around; align-items: center; 
+    border-radius: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); z-index: 1000; 
 }
-
-.nav-item { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    text-decoration: none; 
-    color: #8E8E93; 
-    gap: 4px; 
-}
-
-.nav-item i { font-size: 1.2rem; }
-.nav-item span { font-size: 0.6rem; font-weight: 700; }
+.nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #8E8E93; gap: 3px; }
+.nav-item i { font-size: 1.1rem; }
+.nav-item span { font-size: 0.55rem; font-weight: 700; }
 .nav-item.active { color: var(--p-dark); }
-    
+                   
