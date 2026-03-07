@@ -53,7 +53,7 @@ body { background: var(--bg); padding-bottom: 120px; overflow-x: hidden; }
 .bus-card-body h4 { font-size: 0.72rem; font-weight: 800; color: var(--p-dark); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 
 /* Meta PO & Jam (Optimasi Kecil) */
-.bus-meta { font-size: 0.52rem; font-weight: 600; color: #777; text-transform: uppercase; letter-spacing: 0.1px; margin-top: 2px; }
+.bus-meta { font-size: 0.75rem; font-weight: 500; color: #777; text-transform: uppercase; letter-spacing: 0.1px; margin-top: 2px; }
 .bus-price { font-size: 0.78rem; font-weight: 900; color: #d32f2f; margin: 5px 0; }
 .btn-wa { display: block; background: var(--p-dark); color: var(--accent); text-align: center; padding: 7px 0; border-radius: 10px; text-decoration: none; font-size: 0.62rem; font-weight: 800; border: 1px solid var(--accent); }
 
