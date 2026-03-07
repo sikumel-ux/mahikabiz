@@ -9,7 +9,6 @@ body {
     font-family: 'Poppins', sans-serif; 
     background: var(--bg); 
     padding-bottom: 120px; 
-    color: #334155;
 }
 
 /* HEADER CURVE PREMIUM */
@@ -29,77 +28,74 @@ body {
     display: flex; align-items: center; justify-content: center; border-radius: 50%;
 }
 
-.logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -1px; }
-.m-yellow { color: var(--accent); } .m-white { color: #fff; }
+.logo-text { font-size: 1.6rem; font-weight: 800; color: #fff; }
+.m-yellow { color: var(--accent); }
 .sub-header-text { color: var(--accent); font-size: 0.65rem; font-weight: 700; margin-top: 5px; text-transform: uppercase; }
 
-/* GRID CONTAINER - Sesuai Rute Populer */
-.container { padding: 30px 12px 10px; }
+/* CONTAINER & BUS GRID */
+.container { padding: 25px 15px; }
 
-#results-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 Kolom Sejajar */
-    gap: 12px;
+.bus-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
 }
 
-/* CARD STYLE: IDENTIK RUTE POPULER */
-.ticket-card {
-    background: white;
-    border-radius: 20px;
+.bus-card { 
+    background: white; 
+    border-radius: 18px; 
+    overflow: hidden; 
+    border-bottom: 4px solid var(--accent); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border: 1px solid #f1f5f9;
 }
 
-.ticket-img {
-    width: 100%;
-    height: 110px;
-    object-fit: cover;
-    background: #e2e8f0;
+.bus-card img { 
+    width: 100%; 
+    height: 100px; 
+    object-fit: cover; 
 }
 
-.ticket-info {
-    padding: 12px;
+.bus-card-body { 
+    padding: 12px; 
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-.ticket-info h3 {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--p-dark);
-    margin-bottom: 2px;
+.bus-card-body h4 { 
+    font-size: 0.8rem; 
+    font-weight: 800; 
+    color: var(--p-dark); 
+    line-height: 1.2;
 }
 
-.po-meta {
-    font-size: 0.75rem;
-    color: #64748b;
-    font-weight: 500;
-    margin-bottom: 8px;
+.bus-meta {
+    font-size: 0.65rem;
+    color: #777;
+    margin-top: 2px;
 }
 
-.price-val {
-    color: #e11d48;
-    font-weight: 800;
-    font-size: 1.1rem;
+.bus-price { 
+    font-size: 0.85rem; 
+    font-weight: 900; 
+    color: #d32f2f; 
+    margin: 8px 0; 
     margin-top: auto;
 }
 
-/* TOMBOL BOOKING - Sesuai Design */
-.btn-wa {
-    display: block;
-    background: var(--p-dark);
-    color: var(--accent);
-    text-align: center;
-    padding: 12px;
-    margin: 10px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-decoration: none;
+.btn-wa { 
+    display: block; 
+    background: var(--p-dark); 
+    color: var(--accent); 
+    text-align: center; 
+    padding: 8px; 
+    border-radius: 10px; 
+    text-decoration: none; 
+    font-size: 0.7rem; 
+    font-weight: 800; 
+    border: 1px solid var(--accent); 
     text-transform: uppercase;
 }
 
@@ -112,5 +108,5 @@ body {
 }
 .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #94a3b8; gap: 4px; }
 .nav-item.active { color: var(--p-dark); }
-.nav-item span { font-size: 0.6rem; font-weight: 700; }
+.nav-item span { font-size: 0.55rem; font-weight: 700; }
     
