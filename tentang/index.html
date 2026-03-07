@@ -3,88 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Profile - MAHIKA Trans</title>
+    <title>MAHIKA TRANS - Solusi Tiket Bus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="style-profile.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="main-header">
-        <div class="header-content">
-            <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Profile</span></h1>
-            <p class="tagline-yellow">Eksklusif & Terpercaya</p>
-        </div>
+        <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">TRANS</span></h1>
+        <span class="tagline-yellow">Eksklusif & Terpercaya</span>
     </header>
 
-    <main class="container">
-        <div class="profile-card">
-            <div class="brand-logo-container">
-                <i class="fas fa-bus"></i>
-            </div>
-            <h3>MAHIKA TRANS</h3>
-            <p>Solusi perjalanan darat terbaik dengan layanan kelas premium untuk kenyamanan Anda dan keluarga.</p>
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search" style="color: #ccc;"></i>
+            <input type="text" id="search-input" placeholder="Cari rute atau tujuan...">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-services">
+            <a href="jadwal.html" class="service-item">
+                <div class="service-icon bg-blue"><i class="fas fa-bus"></i></div>
+                <span>Tiket Bus</span>
+            </a>
+            <a href="promo.html" class="service-item">
+                <div class="service-icon bg-orange"><i class="fas fa-percentage"></i></div>
+                <span>Promo</span>
+            </a>
+            <a href="news.html" class="service-item">
+                <div class="service-icon bg-teal"><i class="fas fa-newspaper"></i></div>
+                <span>Berita</span>
+            </a>
+            <a href="profile.html" class="service-item">
+                <div class="service-icon bg-red"><i class="fas fa-info-circle"></i></div>
+                <span>Profil</span>
+            </a>
         </div>
 
-        <div class="section-label">
-            <i class="fas fa-info-circle"></i> TENTANG KAMI
-        </div>
-        <div class="about-text">
-            Mahika Trans hadir sebagai mitra perjalanan yang mengutamakan keselamatan dan ketepatan waktu. Kami bekerja sama dengan berbagai PO Bus ternama untuk memastikan rute yang Anda butuhkan selalu tersedia dengan harga terbaik.
+        <div class="section-label"><i class="fas fa-fire" style="color: #ff4500;"></i> PROMO SPESIAL</div>
+        <div class="promo-slider" id="promo-list">
+            </div>
+
+        <div class="section-label"><i class="fas fa-map-marker-alt" style="color: #d32f2f;"></i> RUTE POPULER</div>
+        <div class="bus-grid" id="bus-list">
+            </div>
+
+        <div class="section-label"><i class="fas fa-star m-yellow"></i> APA KATA MEREKA</div>
+        <div class="testi-container">
+            <div id="testi-content" class="fade-anim">
+                </div>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-box">
-                <i class="fas fa-check-circle"></i>
-                <h5>Terpercaya</h5>
-                <p>Ribuan tiket terjual setiap bulan.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fas fa-clock"></i>
-                <h5>On Time</h5>
-                <p>Jadwal keberangkatan yang akurat.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fas fa-heart"></i>
-                <h5>Nyaman</h5>
-                <p>Armada pilihan dengan fasilitas lengkap.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fas fa-user-shield"></i>
-                <h5>Aman</h5>
-                <p>Driver berpengalaman di setiap rute.</p>
-            </div>
+        <div class="section-label"><i class="fas fa-images"></i> GALLERY ARMADA</div>
+        <div class="gallery-container">
+            <div id="gallery-fade" class="fade-anim">
+                </div>
         </div>
 
-        <div class="brand-footer">
-            <p>© 2026 MAHIKA TRANS BUSINESS</p>
-            <div class="social-links">
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-tiktok"></i>
+        <div class="section-label"><i class="fas fa-rss"></i> BERITA TERBARU</div>
+        <div id="news-list">
             </div>
+
+        <div class="marquee-wrapper">
+            <div class="marquee-content" id="marquee-po">
+                </div>
         </div>
-    </main>
+    </div>
 
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <div class="nav-icon-wrapper"><i class="fas fa-home"></i></div>
+        <a href="index.html" class="nav-item active">
+            <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-        <a href="jadwal" class="nav-item">
-            <div class="nav-icon-wrapper"><i class="fas fa-calendar-alt"></i></div>
+        <a href="jadwal.html" class="nav-item">
+            <i class="fas fa-calendar-alt"></i>
             <span>Jadwal</span>
         </a>
-        <a href="/profile" class="nav-item active">
-            <div class="nav-icon-wrapper"><i class="fas fa-user-circle"></i></div>
-            <span>Profile</span>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user-circle"></i>
+            <span>Profil</span>
         </a>
-        <a href="/kontak" class="nav-item">
-            <div class="nav-icon-wrapper"><i class="fas fa-comment-dots"></i></div>
-            <span>Kontak</span>
+        <a href="https://wa.me/6285156677461" class="nav-item">
+            <i class="fas fa-comment-dots"></i>
+            <span>Bantuan</span>
         </a>
     </nav>
 
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="index.js"></script>
 </body>
-  </html>
-  
+</html>
