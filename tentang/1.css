@@ -1,0 +1,132 @@
+/* ==========================================
+   ROOT & BASE STYLE
+   ========================================== */
+:root { 
+    --p-dark: #003B73; 
+    --accent: #FFC107; 
+    --bg: #F5F7FA; 
+    --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background: var(--bg); padding-bottom: 120px; overflow-x: hidden; }
+
+/* ==========================================
+   HEADER (MELENGKUNG)
+   ========================================== */
+.main-header { 
+    background: var(--p-dark); 
+    padding: 45px 20px 80px; /* Padding bawah ditambah biar lengkungan gak ngenain teks */
+    text-align: center; 
+    position: relative; 
+    border-radius: 0 0 45px 45px; /* Efek melengkung bawah lebih tegas */
+    z-index: 1;
+}
+.logo-text { font-size: 2.2rem; font-weight: 900; line-height: 1; margin-bottom: 5px; }
+.m-yellow { color: var(--accent); } 
+.m-white { color: #fff; }
+.tagline-yellow { 
+    color: var(--accent); font-size: 0.65rem; letter-spacing: 2px; 
+    text-transform: uppercase; font-weight: 700; display: block; 
+}
+
+/* ==========================================
+   CONTAINER & SPACING
+   ========================================== */
+.container { padding: 0 20px; position: relative; z-index: 10; }
+.profile-page { margin-top: -30px; } /* Jarak naik ke area biru lebih kecil, biar gak nyenggol teks header */
+
+.section-label { 
+    font-weight: 800; color: var(--p-dark); margin: 30px 0 15px; 
+    display: flex; align-items: center; gap: 8px; font-size: 0.9rem; 
+    text-transform: uppercase;
+}
+
+/* ==========================================
+   SERVICE GRID (FOTO)
+   ========================================== */
+.service-grid-photo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.s-card {
+    position: relative; height: 110px; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.s-card img { width: 100%; height: 100%; object-fit: cover; }
+.s-overlay {
+    position: absolute; inset: 0; background: rgba(0, 59, 115, 0.65);
+    display: flex; align-items: center; justify-content: center;
+}
+.s-overlay span { color: var(--accent); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; }
+
+/* ==========================================
+   ABOUT US (SIMPLE, JUSTIFY, SHADOW BAWAH)
+   ========================================== */
+.about-card-simple {
+    background: white; padding: 25px; border-radius: 22px;
+    font-size: 0.78rem; line-height: 1.8; color: #444; text-align: justify;
+    /* Shadow biru tua di bawah saja */
+    box-shadow: 0 12px 18px -10px rgba(0, 59, 115, 0.3);
+}
+
+/* ==========================================
+   GALLERY & TESTIMONI (WADAH JS)
+   ========================================== */
+.gallery-container { 
+    width: 100%; height: 210px; background: #eee; 
+    border-radius: 22px; overflow: hidden; position: relative; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+}
+.gallery-container img { 
+    width: 100%; height: 100%; object-fit: cover; 
+    position: absolute; top: 0; left: 0; 
+    transition: opacity 0.3s ease-in-out; 
+}
+
+.testi-container { 
+    background: white; padding: 25px; border-radius: 22px; 
+    box-shadow: 0 12px 18px -10px rgba(0, 59, 115, 0.1);
+    min-height: 145px; display: flex; align-items: center; justify-content: center; 
+}
+.testi-item { text-align: center; width: 100%; }
+.testi-user { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 10px; }
+.testi-user img { width: 48px; height: 48px; border-radius: 50%; border: 2.5px solid var(--accent); object-fit: cover; }
+.testi-name { font-size: 0.82rem; font-weight: 700; color: var(--p-dark); text-align: left; }
+.testi-stars { color: var(--accent); font-size: 0.65rem; display: block; }
+.testi-text { font-size: 0.74rem; color: #555; font-style: italic; line-height: 1.5; }
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+.fade-anim { animation: fadeInOut 5s infinite; }
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(5px); }
+    10%, 90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-5px); }
+}
+
+/* ==========================================
+   SINGLE BUTTON ACTION
+   ========================================== */
+.single-action { margin: 40px 0 15px; }
+.btn-main-contact {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--p-dark); color: var(--accent); padding: 18px;
+    border-radius: 18px; text-decoration: none; font-weight: 800; font-size: 0.85rem;
+    border: 2px solid var(--accent);
+    box-shadow: 0 12px 30px rgba(0, 59, 115, 0.25);
+    transition: 0.3s ease;
+}
+.btn-main-contact:active { transform: scale(0.96); }
+
+/* ==========================================
+   BOTTOM NAVIGATION (iPHONE STYLE)
+   ========================================== */
+.bottom-nav { 
+    position: fixed; bottom: 20px; left: 20px; right: 20px; height: 75px; 
+    background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); 
+    display: flex; justify-content: space-around; align-items: center; 
+    border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); z-index: 1000; 
+}
+.nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #8E8E93; gap: 5px; }
+.nav-item i { font-size: 1.3rem; }
+.nav-item span { font-size: 0.65rem; font-weight: 700; }
+.nav-item.active { color: var(--p-dark); }
