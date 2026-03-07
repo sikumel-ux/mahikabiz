@@ -1,0 +1,72 @@
+/* --- STYLE KHUSUS HALAMAN KONTAK --- */
+
+.map-container {
+    width: 100%;
+    height: 250px;
+    background: #ddd;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.contact-card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 25px -10px rgba(0, 59, 115, 0.15);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.contact-item:last-child { margin-bottom: 0; }
+
+.contact-item i {
+    width: 40px;
+    height: 40px;
+    background: var(--bg);
+    color: var(--p-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 1.1rem;
+}
+
+.contact-item strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--p-dark);
+}
+
+.contact-item p {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* TOMBOL WA WARNA MAHIKA (BIRU & KUNING) */
+.btn-wa-mahika {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--p-dark); /* Biru Mahika */
+    color: var(--accent);     /* Kuning Mahika */
+    padding: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: 2px solid var(--accent);
+    box-shadow: 0 10px 20px rgba(0, 59, 115, 0.3);
+    transition: 0.3s;
+}
+
+.btn-wa-mahika:active {
+    transform: scale(0.95);
+}
