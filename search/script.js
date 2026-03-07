@@ -1,4 +1,4 @@
-// Konfigurasi Firebase tetap
+// Konfigurasi Firebase lo bro
 const firebaseConfig = {
     apiKey: "AIzaSyBZNupFpsHWibTfthCtiGc8mzB2q0QaOqY",
     authDomain: "mahikabiz.firebaseapp.com",
@@ -23,7 +23,7 @@ async function performSearch() {
         const container = document.getElementById('results-list');
         
         if (!data) {
-            container.innerHTML = `<p style="text-align:center; padding:50px; color:#94a3b8;">Jadwal tidak tersedia.</p>`;
+            container.innerHTML = `<p style="grid-column: 1/3; text-align:center; padding:50px;">Data kosong.</p>`;
             return;
         }
 
@@ -41,8 +41,10 @@ async function performSearch() {
 
 function renderResults(list, q) {
     const container = document.getElementById('results-list');
+    container.className = "bus-grid"; // Set class container ke bus-grid
+    
     if (list.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:40px; color:#94a3b8;"><p>Rute "${q}" tidak ditemukan.</p></div>`;
+        container.innerHTML = `<div style="grid-column: 1/3; text-align:center; padding:40px; color:#777;"><p>Rute "${q}" tidak ditemukan.</p></div>`;
         return;
     }
 
@@ -52,19 +54,14 @@ function renderResults(list, q) {
         const waLink = `https://wa.me/6285156677461?text=Halo Mahika Trans, saya mau pesan tiket ${cleanPO} rute ${b.tujuan} jam ${b.jam}`;
         
         return `
-        <div class="ticket-card">
-            <div class="ticket-main-content">
-                <img src="${b.foto || 'https://via.placeholder.com/150'}" class="ticket-img">
-                <div class="ticket-info">
-                    <span class="po-title">${cleanPO}</span>
-                    <h3>${b.tujuan}</h3>
-                    <div class="ticket-meta">
-                        <span class="jam-badge"><i class="far fa-clock"></i> ${b.jam}</span>
-                        <span class="price-val">Rp ${formattedPrice}</span>
-                    </div>
-                </div>
+        <div class="bus-card">
+            <img src="${b.foto || 'https://via.placeholder.com/300'}" alt="${b.tujuan}">
+            <div class="bus-card-body">
+                <h4>${b.tujuan}</h4>
+                <p class="bus-meta">${cleanPO} | ${b.jam}</p>
+                <p class="bus-price">Rp ${formattedPrice}</p>
+                <a href="${waLink}" target="_blank" class="btn-wa">BOOKING</a>
             </div>
-            <a href="${waLink}" target="_blank" class="btn-wa">PESAN SEKARANG</a>
         </div>`;
     }).join('');
 }
