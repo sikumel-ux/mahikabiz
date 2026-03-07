@@ -1,72 +1,83 @@
-/* --- STYLE KHUSUS HALAMAN KONTAK --- */
-
-.map-container {
-    width: 100%;
-    height: 250px;
-    background: #ddd;
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+:root { 
+    --p-dark: #003B73; 
+    --accent: #FFC107; 
+    --bg: #F5F7FA; 
 }
 
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background: var(--bg); padding-bottom: 110px; overflow-x: hidden; }
+
+/* HEADER */
+.main-header { 
+    background: var(--p-dark); 
+    padding: 60px 20px 120px; 
+    text-align: center; 
+    border-radius: 0 0 50px 50px; 
+    position: relative;
+    z-index: 1;
+}
+.logo-text { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+.m-yellow { color: var(--accent); } 
+.m-white { color: #fff; }
+.tagline-yellow { 
+    color: var(--accent); font-size: 0.7rem; font-weight: 700; 
+    letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; display: block; 
+}
+
+/* CONTENT SPACING */
+.container { padding: 0 20px; position: relative; z-index: 10; }
+.contact-page { margin-top: -35px; }
+
+.section-label { 
+    font-weight: 800; color: var(--p-dark); margin: 35px 0 15px; 
+    display: flex; align-items: center; gap: 8px; font-size: 0.85rem; 
+}
+
+/* MAPS */
+.map-container {
+    width: 100%; height: 250px; background: #eee;
+    border-radius: 25px; overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* CONTACT CARD */
 .contact-card {
-    background: white;
-    padding: 20px;
-    border-radius: 20px;
+    background: white; padding: 20px; border-radius: 25px;
     box-shadow: 0 15px 25px -10px rgba(0, 59, 115, 0.15);
 }
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
+.contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
 .contact-item:last-child { margin-bottom: 0; }
 
-.contact-item i {
-    width: 40px;
-    height: 40px;
-    background: var(--bg);
-    color: var(--p-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    font-size: 1.1rem;
+.c-icon {
+    width: 45px; height: 45px; background: var(--bg);
+    color: var(--p-dark); display: flex; align-items: center;
+    justify-content: center; border-radius: 15px; font-size: 1.2rem;
 }
+.c-text strong { display: block; font-size: 0.85rem; color: var(--p-dark); margin-bottom: 2px; }
+.c-text p { font-size: 0.75rem; color: #666; line-height: 1.4; }
 
-.contact-item strong {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--p-dark);
-}
-
-.contact-item p {
-    font-size: 0.75rem;
-    color: #666;
-}
-
-/* TOMBOL WA WARNA MAHIKA (BIRU & KUNING) */
+/* BUTTON WHATSAPP MAHIKA */
 .btn-wa-mahika {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    background: var(--p-dark); /* Biru Mahika */
-    color: var(--accent);     /* Kuning Mahika */
-    padding: 20px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.9rem;
-    border: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: var(--p-dark); color: var(--accent);
+    padding: 20px; border-radius: 20px; text-decoration: none;
+    font-weight: 800; font-size: 0.9rem; border: 2px solid var(--accent);
     box-shadow: 0 10px 20px rgba(0, 59, 115, 0.3);
-    transition: 0.3s;
+    margin-top: 30px; transition: 0.3s ease;
 }
+.btn-wa-mahika:active { transform: scale(0.96); }
 
-.btn-wa-mahika:active {
-    transform: scale(0.95);
+/* BOTTOM NAVIGATION */
+.bottom-nav { 
+    position: fixed; bottom: 20px; left: 20px; right: 20px; height: 75px; 
+    background: #fff; display: flex; justify-content: space-around; 
+    align-items: center; border-radius: 30px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); z-index: 1000; 
 }
+.nav-item { 
+    display: flex; flex-direction: column; align-items: center; 
+    text-decoration: none; color: #8E8E93; gap: 3px; 
+    font-size: 0.65rem; font-weight: 700; 
+}
+.nav-item i { font-size: 1.3rem; }
+.nav-item.active { color: var(--p-dark); }
