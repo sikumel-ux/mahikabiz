@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Jadwal - MAHIKA Trans</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-jadwal.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+</head>
+<body>
+
+    <header class="header-jadwal">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i></a>
+        <h1>Cari Jadwal Bus</h1>
+    </header>
+
+    <div class="container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Ketik tujuan (Misal: Jambi)..." onkeyup="filterJadwal()">
+        </div>
+
+        <div class="table-container">
+            <table id="jadwalTable">
+                <thead>
+                    <tr>
+                        <th>Rute</th>
+                        <th>Nama PO</th>
+                        <th>Jam</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="3" class="loading">Memuat data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script-jadwal.js"></script>
+</body>
+</html>
