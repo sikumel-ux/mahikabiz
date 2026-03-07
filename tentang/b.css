@@ -1,0 +1,60 @@
+:root { --p-dark: #003B73; --accent: #FFC107; --bg: #F5F7FA; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background: var(--bg); padding-bottom: 120px; }
+
+/* HEADER */
+.main-header { 
+    background: var(--p-dark); 
+    padding: 60px 20px 120px; 
+    text-align: center; 
+    border-radius: 0 0 50px 50px; 
+}
+.logo-text { font-size: 2.2rem; font-weight: 900; }
+.m-yellow { color: var(--accent); } .m-white { color: #fff; }
+.tagline-yellow { color: var(--accent); font-size: 0.7rem; font-weight: 700; display: block; margin-top: 5px; }
+
+/* CONTAINER & SPACING */
+.container { padding: 0 20px; }
+.profile-page { margin-top: 20px !important; }
+
+.section-label { font-weight: 800; color: var(--p-dark); margin: 30px 0 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+
+/* CARDS LAYANAN */
+.service-grid-photo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.s-card { position: relative; height: 120px; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.s-card img { width: 100%; height: 100%; object-fit: cover; }
+.s-overlay { position: absolute; inset: 0; background: rgba(0, 59, 115, 0.6); display: flex; align-items: center; justify-content: center; }
+.s-overlay span { color: var(--accent); font-weight: 800; font-size: 0.8rem; }
+
+/* ABOUT CARD */
+.about-card-simple { background: white; padding: 25px; border-radius: 20px; font-size: 0.8rem; line-height: 1.6; box-shadow: 0 15px 25px -10px rgba(0,0,0,0.1); text-align: justify; }
+
+/* GALLERY - Contain agar foto bus utuh */
+.gallery-container { 
+    width: 100%; 
+    height: 230px; 
+    border-radius: 25px; 
+    overflow: hidden; 
+    background: #000; /* BG hitam agar estetik pas foto utuh muncul */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+    position: relative;
+}
+.gallery-container img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; /* INI KUNCINYA BIAR GAK NGEZOOM */
+    display: block;
+}
+
+/* TESTIMONI */
+.testi-container { background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); min-height: 140px; display: flex; align-items: center; }
+
+/* BUTTON & NAV */
+.btn-main-contact { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--p-dark); color: var(--accent); padding: 18px; border-radius: 20px; text-decoration: none; font-weight: 800; border: 2px solid var(--accent); box-shadow: 0 10px 20px rgba(0, 59, 115, 0.2); }
+.bottom-nav { position: fixed; bottom: 20px; left: 20px; right: 20px; height: 75px; background: #fff; display: flex; justify-content: space-around; align-items: center; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1000; }
+.nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #888; font-size: 0.65rem; font-weight: 700; gap: 3px; }
+.nav-item i { font-size: 1.4rem; }
+.nav-item.active { color: var(--p-dark); }
+
+.fade-anim { animation: fade 5s infinite; }
+@keyframes fade { 0%, 100% { opacity: 0; } 15%, 85% { opacity: 1; } }
