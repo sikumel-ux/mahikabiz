@@ -2,58 +2,60 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 body { background: var(--bg); padding-bottom: 120px; }
 
-/* HEADER CURVE */
+/* HEADER TETAP CURVE */
 .main-header { 
-    background: var(--p-dark); 
-    padding: 60px 20px 45px; 
-    text-align: center; 
-    position: sticky; top: 0; z-index: 100;
-    border-radius: 0 0 40px 40px; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    background: var(--p-dark); padding: 60px 20px 45px; 
+    text-align: center; position: sticky; top: 0; z-index: 100;
+    border-radius: 0 0 40px 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
-
 .back-btn { 
     position: absolute; left: 20px; bottom: 45px; color: white; 
     background: rgba(255,255,255,0.1); width: 35px; height: 35px;
     display: flex; align-items: center; justify-content: center; border-radius: 50%;
 }
-
 .logo-text { font-size: 1.6rem; font-weight: 900; }
 .m-yellow { color: var(--accent); } .m-white { color: #fff; }
-.sub-header-text { color: var(--accent); font-size: 0.75rem; font-weight: 800; margin-top: 5px; }
+.sub-header-text { color: var(--accent); font-size: 0.7rem; font-weight: 800; margin-top: 5px; }
 
-/* CONTAINER FIX (BIAR GAK NABRAK) */
-.container { 
-    padding: 30px 15px 10px; /* Padding atas ditambah biar ada jarak */
-    margin-top: 0; /* Hapus margin negatif */
+/* GRID SYSTEM 2 KOLOM */
+.container { padding: 30px 12px 10px; }
+
+#results-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* BAGI DUA KOLOM */
+    gap: 12px; /* Jarak antar card */
 }
 
-/* TICKET CARD */
+/* CARD GAYA VERTIKAL */
 .ticket-card {
-    background: white; border-radius: 20px; margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 6px solid var(--p-dark);
-    display: flex; flex-direction: column; overflow: hidden;
+    background: white; border-radius: 18px; 
+    display: flex; flex-direction: column; 
+    overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
 }
 
-.ticket-main-area { display: flex; padding: 15px; gap: 15px; }
-.ticket-img { width: 90px; height: 90px; border-radius: 12px; object-fit: cover; background: #eee; }
-.ticket-details { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.ticket-img { 
+    width: 100%; height: 110px; /* Foto di atas */
+    object-fit: cover; background: #eee; 
+}
 
-.ticket-top { display: flex; justify-content: space-between; align-items: flex-start; }
-.po-title { font-weight: 900; color: var(--p-dark); font-size: 0.85rem; text-transform: uppercase; }
-.jam-badge { background: #f0f4f8; color: var(--p-dark); padding: 3px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; }
+.ticket-info {
+    padding: 10px;
+    display: flex; flex-direction: column; gap: 5px;
+    flex-grow: 1;
+}
 
-.ticket-mid h3 { font-size: 1.2rem; font-weight: 900; color: #333; }
-.price-val { color: #d32f2f; font-weight: 900; font-size: 1.1rem; }
+.po-title { font-size: 0.65rem; font-weight: 800; color: var(--p-dark); text-transform: uppercase; }
+.ticket-info h3 { font-size: 0.95rem; font-weight: 900; color: #333; margin: 2px 0; }
+.jam-badge { font-size: 0.65rem; color: #777; font-weight: 600; }
+.price-val { color: #d32f2f; font-weight: 900; font-size: 0.9rem; margin-top: auto; }
 
-.ticket-action { padding: 0 15px 15px; }
 .btn-wa {
     display: block; background: var(--p-dark); color: var(--accent); 
-    text-align: center; padding: 12px; border-radius: 12px;
-    text-decoration: none; font-size: 0.85rem; font-weight: 800; border: 1px solid var(--accent);
+    text-align: center; padding: 8px; font-size: 0.7rem;
+    font-weight: 800; text-decoration: none; border-top: 1px solid var(--accent);
 }
 
-/* BOTTOM NAV */
 .bottom-nav { 
     position: fixed; bottom: 20px; left: 20px; right: 20px; height: 70px; 
     background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); 
@@ -62,4 +64,5 @@ body { background: var(--bg); padding-bottom: 120px; }
 }
 .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #8E8E93; gap: 4px; }
 .nav-item.active { color: var(--p-dark); }
-.nav-item span { font-size: 0.6rem; font-weight: 700; }
+.nav-item span { font-size: 0.55rem; font-weight: 700; }
+           
