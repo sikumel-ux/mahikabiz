@@ -63,13 +63,13 @@ function init() {
                 [allRoutesClean[i], allRoutesClean[j]] = [allRoutesClean[j], allRoutesClean[i]];
             }
 
-            // Step C: Batasi hanya 6 rute (Limit)
-            const limitedRoutes = allRoutesClean.slice(0, 6);
+            // Step C: Batasi hanya 4 rute (Limit)
+            const limitedRoutes = allRoutesClean.slice(0, 4);
 
             // Step D: Render ke HTML
             container.innerHTML = limitedRoutes.map(b => {
                 const formattedPrice = Number(b.harga).toLocaleString('id-ID');
-                const waLink = `https://wa.me/6285156677461?text=Halo Mahika, mau pesan tiket ${b.namaPO} rute ${b.tujuan}`;
+                const waLink = `https://wa.me/6281211407667?text=Halo Mahika, mau pesan tiket ${b.namaPO} rute ${b.tujuan}`;
                 
                 return `
                     <div class="bus-card">
