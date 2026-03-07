@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cari Tiket - MAHIKA Trans</title>
+    <title>Cari Jadwal - MAHIKA Trans</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -20,15 +21,15 @@
         </div>
         <div class="header-content">
             <h1 class="logo-text"><span class="m-yellow">MAHIKA</span> <span class="m-white">Search</span></h1>
-            <p id="display-query" class="sub-header-text">Mencari...</p>
+            <p id="display-query" class="sub-header-text">Mencari Jadwal...</p>
         </div>
     </header>
 
     <main class="container">
-        <div id="results-list">
+        <div id="results-list" class="grid-container">
             <div class="loading-state">
                 <i class="fas fa-circle-notch fa-spin"></i>
-                <p>Menyiapkan jadwal...</p>
+                <p>Menyiapkan data...</p>
             </div>
         </div>
     </main>
