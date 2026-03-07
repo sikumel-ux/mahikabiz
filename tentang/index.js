@@ -20,7 +20,7 @@ const testimoniData = [
 ];
 
 const galleryData = [
-    "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=600",
+    "IMG_20260218_114027.jpg",
     "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=600",
     "https://images.unsplash.com/photo-1590674899484-d5640e854abe?q=80&w=600",
     "https://images.unsplash.com/photo-1518005020251-58296d424930?q=80&w=600"
