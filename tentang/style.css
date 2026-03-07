@@ -1,0 +1,103 @@
+/* Container khusus profile */
+.profile-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 25px;
+    text-align: center;
+    margin-top: -30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 10;
+}
+
+.brand-logo-container {
+    width: 70px;
+    height: 70px;
+    background: var(--p-dark);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    border: 4px solid #F5F7FA;
+}
+
+.profile-card h3 {
+    color: var(--p-dark);
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.profile-card p {
+    font-size: 0.75rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.about-text {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #444;
+    border-left: 5px solid var(--p-dark);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.feature-box {
+    background: white;
+    padding: 15px;
+    border-radius: 18px;
+    text-align: center;
+    border: 1px solid #eee;
+}
+
+.feature-box i {
+    color: var(--p-dark);
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.feature-box h5 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--p-dark);
+}
+
+.feature-box p {
+    font-size: 0.6rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.brand-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+
+.brand-footer p {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #bbb;
+    letter-spacing: 1px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+    color: var(--p-dark);
+    font-size: 1.2rem;
+}
