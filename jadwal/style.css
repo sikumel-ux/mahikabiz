@@ -1,0 +1,45 @@
+:root { --p-dark: #003B73; --accent: #FFC107; --bg: #F8FAFC; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background: var(--bg); padding-bottom: 120px; }
+
+/* Header Melengkung */
+.main-header { 
+    background: var(--p-dark); padding: 50px 20px 60px; text-align: center;
+    border-radius: 0 0 40px 40px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.logo-text { font-size: 1.6rem; font-weight: 800; }
+.m-yellow { color: var(--accent); } .m-white { color: white; }
+.sub-header-text { color: var(--accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; }
+
+.container { padding: 0 20px; margin-top: -30px; }
+
+/* Search Box */
+.search-card {
+    background: white; padding: 15px 20px; border-radius: 20px;
+    display: flex; align-items: center; gap: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+.search-card i { color: var(--p-dark); font-size: 1.2rem; }
+.search-card input { border: none; outline: none; width: 100%; font-size: 0.9rem; font-weight: 600; color: var(--p-dark); }
+
+/* Table Design */
+.hidden { display: none; }
+.table-card { background: white; border-radius: 20px; margin-top: 25px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.table-header { background: #f1f5f9; padding: 12px 20px; font-size: 0.75rem; font-weight: 800; color: var(--p-dark); border-bottom: 1px solid #eee; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; padding: 12px 15px; font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; }
+td { padding: 15px; font-size: 0.85rem; border-bottom: 1px solid #f8fafc; color: #334155; }
+td b { color: var(--p-dark); }
+
+/* Service Section (Pemanis) */
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 30px; }
+.service-item { background: white; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+.s-icon { width: 45px; height: 45px; background: #e0f2fe; color: var(--p-dark); display: flex; align-items: center; justify-content: center; border-radius: 12px; margin: 0 auto 10px; font-size: 1.2rem; }
+.service-item h4 { font-size: 0.85rem; font-weight: 800; color: var(--p-dark); }
+.service-item p { font-size: 0.65rem; color: #64748b; margin-top: 2px; }
+
+/* Bottom Nav */
+.bottom-nav { position: fixed; bottom: 20px; left: 20px; right: 20px; height: 70px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1000; }
+.nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #94a3b8; gap: 4px; }
+.nav-item.active { color: var(--p-dark); }
+.nav-item span { font-size: 0.6rem; font-weight: 700; }
