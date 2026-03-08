@@ -115,7 +115,7 @@ function init() {
 document.getElementById('search-input')?.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         const query = e.target.value.toLowerCase().trim();
-        if (query) window.location.href = `/search?q=${encodeURIComponent(query)}`;
+        if (query) window.location.href = `/jadwal?q=${encodeURIComponent(query)}`;
     }
 });
 
