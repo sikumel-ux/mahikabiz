@@ -71,7 +71,7 @@ function init() {
                             <h4>${b.tujuan}</h4>
                             <div class="bus-meta">${b.namaPO} | ${b.jam || 'TIAP HARI'}</div>
                         </div>
-                      // <div class="bus-price">Rp ${Number(b.harga).toLocaleString('id-ID')}</div> 
+                      
                         <a href="https://wa.me/6285156677461?text=Halo Mahika, mau pesan tiket ${b.namaPO} rute ${b.tujuan}" class="btn-wa">BOOKING</a>
                     </div>
                 </div>
