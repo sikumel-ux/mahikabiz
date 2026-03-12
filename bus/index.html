@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Daftar Layanan - MAHIKA Trans</title>
+    <title>Layanan - MAHIKA Trans</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="bus.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -22,22 +22,22 @@
         <div class="filter-bar">
             <div class="search-input">
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" placeholder="Kota Asal">
+                <input type="text" placeholder="Kota Asal (Contoh: Yogyakarta)">
             </div>
             <div class="search-input">
                 <i class="fas fa-location-arrow"></i>
-                <input type="text" placeholder="Kota Tujuan">
+                <input type="text" placeholder="Kota Tujuan (Contoh: Jakarta)">
             </div>
         </div>
 
-        <div class="section-label">Tersedia Hari Ini</div>
+        <div class="section-label">Jadwal Tersedia</div>
 
         <div class="list-wrapper">
             <div class="card-item">
                 <div class="card-info">
                     <div class="brand-info">
                         <span class="brand-name">Murni Jaya</span>
-                        <span class="class-type">Executive Class</span>
+                        <span class="class-type">Executive</span>
                     </div>
                     <div class="route-info">
                         <div class="time-box">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="card-action">
                     <span class="price">Rp 220.000</span>
-                    <a href="#" class="book-btn">Pilih</a>
+                    <a href="https://wa.me/628123456789" class="book-btn">Pesan Sekarang</a>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
                 <div class="card-info">
                     <div class="brand-info">
                         <span class="brand-name">Brave Trans</span>
-                        <span class="class-type">Super Executive</span>
+                        <span class="class-type">Hiace Luxury</span>
                     </div>
                     <div class="route-info">
                         <div class="time-box">
@@ -81,38 +81,30 @@
                 </div>
                 <div class="card-action">
                     <span class="price">Rp 250.000</span>
-                    <a href="#" class="book-btn">Pilih</a>
-                </div>
-            </div>
-
-            <div class="card-item">
-                <div class="card-info">
-                    <div class="brand-info">
-                        <span class="brand-name">Mahika Express</span>
-                        <span class="class-type">Sleeper Bus</span>
-                    </div>
-                    <div class="route-info">
-                        <div class="time-box">
-                            <strong>19:30</strong>
-                            <span>Yogyakarta</span>
-                        </div>
-                        <div class="arrow-icon">
-                            <i class="fas fa-long-arrow-alt-right"></i>
-                        </div>
-                        <div class="time-box">
-                            <strong>06:00</strong>
-                            <span>Surabaya</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <span class="price">Rp 350.000</span>
-                    <a href="#" class="book-btn">Pilih</a>
+                    <a href="https://wa.me/628123456789" class="book-btn">Pesan Sekarang</a>
                 </div>
             </div>
         </div>
     </main>
 
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-home"></i></div>
+            <span>Home</span>
+        </a>
+        <a href="/jadwal" class="nav-item active">
+            <div class="nav-icon-wrapper"><i class="fas fa-calendar-alt"></i></div>
+            <span>Jadwal</span>
+        </a>
+        <a href="/tentang" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-user-circle"></i></div>
+            <span>Profile</span>
+        </a>
+        <a href="/kontak" class="nav-item">
+            <div class="nav-icon-wrapper"><i class="fas fa-comment-dots"></i></div>
+            <span>Kontak</span>
+        </a>
+    </nav>
+
 </body>
-  </html>
-  
+</html>
